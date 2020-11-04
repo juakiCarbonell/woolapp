@@ -8,7 +8,16 @@ export default function Header() {
       <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Woolapp</Navbar.Brand>
+            <Navbar.Brand>
+              Woolapp
+              {/* <img
+                src="/brand.png"
+                width="40"
+                height="40"
+                className="d-inline-block align-center"
+                alt=""
+              ></img> */}
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

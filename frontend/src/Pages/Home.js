@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
-import { Table, Image, Button } from "react-bootstrap";
-
-import wools from "../products";
+import { Table, Image, Button, Row } from "react-bootstrap";
 
 function Home() {
+  const [wools, setWools] = useState([]);
+
+  useEffect(() => {
+    const fetctWools = async () => {
+      const { data } = await axios.get("/wools");
+      setWools(data);
+    };
+    fetctWools();
+  }, []);
 
   const deleteHandler = (id) => {
-    console.log('Delete', id)
-  }
-
+    console.log("Delete", id);
+  };
 
   return (
     <>
+      <Row>
+        <Link to="/wool_create">
+          <Button variant="outline-primary">Crear Lana</Button>
+        </Link>
+      </Row>
       <h1>Lanas</h1>
       <Table striped bordered hover responsive className="text-center">
         <thead>
           <tr>
             <th></th>
-            <th>COLOR</th>
+            <th>MARCA</th>
             <th>NOMBRE</th>
-            <th>TIPO</th>
             <th className="d-flex align-items-center">
               <div className="mr-1">GROSOR</div>
               <div>
@@ -37,7 +48,11 @@ function Home() {
               </div>
             </th>
             <th>LONGITUD</th>
-            <th>RESTANTE</th>
+            <th>PESO</th>
+            <th>MATERIAL</th>
+            <th>COLOR</th>
+            <th>CANTIDAD</th>
+            <th>TOTAL</th>
             <th></th>
           </tr>
         </thead>
@@ -47,6 +62,12 @@ function Home() {
               <td>
                 <Image src={wool.image} width={171} height={180} />
               </td>
+              <td className="align-middle">{wool.brand}</td>
+              <td className="align-middle">{wool.name}</td>
+              <td className="align-middle">{wool.thickness}mm</td>
+              <td className="align-middle">{wool.length}m</td>
+              <td className="align-middle">{wool.weight}gr</td>
+              <td className="align-middle">{wool.material}gr</td>
               <td className="align-middle">
                 <div className="d-flex flex-column justify-content-center align-items-center">
                   {wool.color}
@@ -59,11 +80,9 @@ function Home() {
                   ></div>
                 </div>
               </td>
-              <td className="align-middle">{wool.name}</td>
-              <td className="align-middle">{wool.type}</td>
-              <td className="align-middle">{wool.thickness}mm</td>
-              <td className="align-middle">{wool.length}mm</td>
-              <td className="align-middle">{wool.lengthLeft}mm</td>
+              <td className="align-middle">{wool.amount}</td>
+              <td className="align-middle">{wool.length * wool.amount}m</td>
+
               <td className="align-middle">
                 <Link to={`/wool/${wool._id}`}>
                   <Button variant="light" className="btn-sm">
