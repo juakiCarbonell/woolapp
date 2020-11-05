@@ -21,11 +21,11 @@ function Home() {
   return (
     <>
       <Row>
-        <Link to="/wool_create">
+        <h1>Lanas</h1>
+        <Link to="/wool/create" className="ml-auto">
           <Button variant="outline-primary">Crear Lana</Button>
         </Link>
       </Row>
-      <h1>Lanas</h1>
       <Table striped bordered hover responsive className="text-center">
         <thead>
           <tr>
@@ -89,7 +89,7 @@ function Home() {
                     <i className="fas fa-eye"></i>
                   </Button>
                 </Link>
-                <Link to={`/wool/${wool._id}/edit`}>
+                <Link to={`/wool/edit/${wool._id}`}>
                   <Button variant="light" className="btn-sm">
                     <i className="fas fa-edit"></i>
                   </Button>

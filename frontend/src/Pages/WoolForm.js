@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
-const WoolEdit = () => {
+const WoolForm = ({ mode }) => {
+  const isEditMode = mode === "edit" ? true : false;
   const [image, setImage] = useState("");
   const [brand, setBrand] = useState("");
   const [name, setName] = useState("");
@@ -21,18 +22,17 @@ const WoolEdit = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("e", thickness);
-    setThickness("");
   };
 
   return (
     <>
-      <Link to="/">
-        <Button variant="outline-primary">Volver</Button>
-      </Link>
-
       <FormContainer>
-        <h1>Crear Lana</h1>
+        <Row>
+          <h1>{isEditMode ? "Editar Lana" : "Crear Lana"}</h1>
+          <Link to="/" className="ml-auto">
+            <Button variant="outline-primary">Volver</Button>
+          </Link>
+        </Row>
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="brand">
             <Form.Label>Marca</Form.Label>
@@ -76,11 +76,15 @@ const WoolEdit = () => {
               value={thickness}
               onChange={(e) => setThickness(e.target.value)}
             >
-              <option>Muy Fino</option>
-              <option>Fino</option>
-              <option>Medio</option>
-              <option>Fuerte</option>
-              <option>Muy fuerte</option>
+              <option value="0">Lace</option>
+              <option value="1">Light fingering</option>
+              <option value="2">Fingering</option>
+              <option value="3">Sport</option>
+              <option value="4">Olc</option>
+              <option value="5">Worsted</option>
+              <option value="6">Aran</option>
+              <option value="7">Bullay</option>
+              <option value="8">Super Bullay</option>
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="length">
@@ -104,7 +108,7 @@ const WoolEdit = () => {
           <Form.Group controlId="amount">
             <Form.Label>Cantidad</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               placeholder="Cantidad"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
@@ -130,7 +134,7 @@ const WoolEdit = () => {
           </Form.Group>
 
           <Button type="submit" variant="primary">
-            Crear
+            {isEditMode ? "Editar" : "Crear"}
           </Button>
         </Form>
       </FormContainer>
@@ -138,4 +142,4 @@ const WoolEdit = () => {
   );
 };
 
-export default WoolEdit;
+export default WoolForm;

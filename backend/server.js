@@ -1,22 +1,22 @@
 import express from "express";
-import products from "./data/products.js";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 
+import woolRoutes from "./routes/wool.js";
+
+import { notFound, errorHandler } from "./middleware/error.js";
+
 dotenv.config();
 
-connectDB()
+connectDB();
 
 const app = express();
 
-app.get("/wools", (req, res) => {
-  res.send(products);
-});
+app.use("/wools", woolRoutes);
 
-app.get("/wools/:id", (req, res) => {
-  const product = products.find((p) => p._id === req.params.id);
-  res.send(product);
-});
+app.use(notFound);
+
+app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 

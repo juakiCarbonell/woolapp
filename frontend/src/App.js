@@ -1,12 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./Pages/Home";
 import Wool from "./Pages/Wool";
-import WoolEdit from "./Pages/WoolEdit";
+import WoolForm from "./Pages/WoolForm";
 
 function App() {
   return (
@@ -14,15 +14,20 @@ function App() {
       <Header />
       <main className="py-3">
         <Container>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/wool/:id">
-            <Wool />
-          </Route>
-          <Route exact path="/wool_create">
-            <WoolEdit />
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/wool/create">
+              <WoolForm mode="create" />
+            </Route>
+            <Route exact path="/wool/edit/:id">
+              <WoolForm mode="edit" />
+            </Route>
+            <Route exact path="/wool/:id">
+              <Wool />
+            </Route>
+          </Switch>
         </Container>
       </main>
       <Footer />

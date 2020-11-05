@@ -1,6 +1,5 @@
 const wools = [
   {
-    _id: "1",
     image: "/images/lana1.jpg",
     brand: "Brand",
     name: "Lana 1",
@@ -12,7 +11,6 @@ const wools = [
     amount: 2,
   },
   {
-    _id: "2",
     image: "/images/lana2.jpg",
     brand: "Brand",
     name: "Lana 2",
@@ -24,7 +22,6 @@ const wools = [
     amount: 2,
   },
   {
-    _id: "3",
     image: "/images/lana3.jpg",
     brand: "Brand",
     name: "Lana 3",
@@ -36,7 +33,6 @@ const wools = [
     amount: 2,
   },
   {
-    _id: "4",
     image: "/images/lana4.jpg",
     brand: "Brand",
     name: "Lana 4",
@@ -48,7 +44,6 @@ const wools = [
     amount: 2,
   },
   {
-    _id: "5",
     image: "/images/lana5.jpg",
     brand: "Brand",
     name: "Lana 5",
@@ -60,7 +55,6 @@ const wools = [
     amount: 2,
   },
   {
-    _id: "6",
     image: "/images/lana6.jpg",
     brand: "Brand",
     name: "Lana 6",
