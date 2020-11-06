@@ -6,15 +6,18 @@ import {
   WOOL_DETAILS_REQUEST,
   WOOL_DETAILS_SUCCESS,
   WOOL_DETAILS_FAIL,
+  WOOL_DETAILS_RESET,
   WOOL_DELETE_REQUEST,
   WOOL_DELETE_SUCCESS,
   WOOL_DELETE_FAIL,
   WOOL_UPDATE_REQUEST,
   WOOL_UPDATE_SUCCESS,
+  WOOL_UPDATE_RESET,
   WOOL_UPDATE_FAIL,
   WOOL_CREATE_REQUEST,
   WOOL_CREATE_SUCCESS,
   WOOL_CREATE_FAIL,
+  WOOL_CREATE_RESET,
 } from "../costants/costants";
 
  // ############## FETCH ALL WOOLS ##############
@@ -55,6 +58,11 @@ export const fetchWools = () => async (dispatch) => {
 
 
 // ############## FETCH SINGLE WOOL ##############
+export const fetchWoolReset = () => {
+  return {
+    type: WOOL_DETAILS_RESET,
+  };
+};
 export const fetchWoolStart = () => {
   return {
     type: WOOL_DETAILS_REQUEST,
@@ -127,6 +135,12 @@ export const deleteWool = (id) => async (dispatch) => {
 
 
  // ############## CREATE WOOL ##############
+export const createWoolReset = () => {
+  return {
+    type: WOOL_CREATE_RESET,
+  };
+};
+
 export const createWoolStart = () => {
   return {
     type: WOOL_CREATE_REQUEST,
@@ -163,6 +177,12 @@ export const createWool = (wool) => async (dispatch) => {
 
 
  // ############## UPDATE WOOL ##############
+export const updateWoolReset = () => {
+  return {
+    type: WOOL_UPDATE_RESET,
+  };
+};
+
 export const updateWoolStart = () => {
   return {
     type: WOOL_UPDATE_REQUEST,

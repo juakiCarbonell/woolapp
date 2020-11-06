@@ -4,9 +4,10 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 
-import { createWool } from "../store/actions/wool";
+import { createWool, createWoolReset } from "../store/actions/wool";
 
 const WoolCreate = () => {
+  let history = useHistory();
   const [image, setImage] = useState("");
   const [brand, setBrand] = useState("");
   const [name, setName] = useState("");
@@ -20,7 +21,13 @@ const WoolCreate = () => {
   const dispatch = useDispatch();
 
   const woolCreate = useSelector((state) => state.woolCreate);
-  const { loading, error, wool } = woolCreate;
+  const { loading, error, wool, success } = woolCreate;
+
+  useEffect(() => {
+    if(success) {
+      history.push('/')
+    }
+  }, [dispatch, success])
 
   const uploadFileHandler = () => {
     console.log("uoploas");

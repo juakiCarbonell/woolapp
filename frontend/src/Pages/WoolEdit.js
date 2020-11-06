@@ -4,10 +4,11 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 
-import { updateWool, fetchWool } from "../store/actions/wool";
+import { updateWool, fetchWool, fetchWoolReset, updateWoolReset } from "../store/actions/wool";
 
 const WoolForm = () => {
   let { id } = useParams();
+  let history = useHistory();
   const [image, setImage] = useState("");
   const [brand, setBrand] = useState("");
   const [name, setName] = useState("");
@@ -25,28 +26,33 @@ const WoolForm = () => {
     loading: loadingUpdate,
     error: errorUpdate,
     wool: woolUpdated,
+    success: woolSuccess,
   } = woolUpdate;
 
   const woolDetails = useSelector((state) => state.woolDetails);
   const { loading, error, wool } = woolDetails;
 
   useEffect(() => {
-    if (!wool.name || wool._id !== id) {
-      console.log('if')
-      dispatch(fetchWool(id));
+    if (woolSuccess) {
+      dispatch(updateWoolReset())
+      dispatch(fetchWoolReset())
+      history.push("/");
     } else {
-      console.log("else");
-      setImage(wool.image);
-      setBrand(wool.brand);
-      setName(wool.name);
-      setThickness(wool.thickness);
-      setLength(wool.length);
-      setWeight(wool.weight);
-      setMaterial(wool.material);
-      setColor(wool.color);
-      setAmount(wool.amount);
+      if (!wool.name || wool._id !== id) {
+        dispatch(fetchWool(id));
+      } else {
+        setImage(wool.image);
+        setBrand(wool.brand);
+        setName(wool.name);
+        setThickness(wool.thickness);
+        setLength(wool.length);
+        setWeight(wool.weight);
+        setMaterial(wool.material);
+        setColor(wool.color);
+        setAmount(wool.amount);
+      }
     }
-  }, [dispatch, id, wool]);
+  }, [dispatch, id, wool, woolSuccess, history]);
 
   const uploadFileHandler = () => {
     console.log("uoploas");
