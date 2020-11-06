@@ -6,6 +6,9 @@ import {
   WOOL_DETAILS_REQUEST,
   WOOL_DETAILS_SUCCESS,
   WOOL_DETAILS_FAIL,
+  WOOL_DELETE_REQUEST,
+  WOOL_DELETE_SUCCESS,
+  WOOL_DELETE_FAIL,
 } from "../costants/costants";
 
  // ############## FETCH ALL WOOLS ##############
@@ -78,4 +81,40 @@ export const fetchWool = (id) => async (dispatch) => {
     dispatch(fetchWoolError(error));
   }
 };
- // ############## END FETCH SINGLE WOOL ##############
+// ############## END FETCH SINGLE WOOL ##############
+
+
+
+// ############## DELETE WOOL ##############
+export const deleteWoolStart = () => {
+  return {
+    type: WOOL_DELETE_REQUEST,
+  };
+};
+
+export const deleteWoolSuccess = () => {
+  return {
+    type: WOOL_DELETE_SUCCESS
+  };
+};
+export const deleteWoolError = (error) => {
+  return {
+    type: WOOL_DELETE_FAIL,
+    payload:
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+  };
+};
+
+export const deleteWool = (id) => async (dispatch) => {
+  try {
+    dispatch(deleteWoolStart());
+
+    await axios.delete(`/wools/${id}`);
+    dispatch(deleteWoolSuccess());
+  } catch (error) {
+    dispatch(deleteWoolError(error));
+  }
+};
+ // ############## END DELETE WOOL ##############

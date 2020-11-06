@@ -5,6 +5,9 @@ import {
   WOOL_DETAILS_REQUEST,
   WOOL_DETAILS_SUCCESS,
   WOOL_DETAILS_FAIL,
+  WOOL_DELETE_REQUEST,
+  WOOL_DELETE_SUCCESS,
+  WOOL_DELETE_FAIL,
 } from "../costants/costants";
 
 const initialStateList = {
@@ -14,6 +17,11 @@ const initialStateList = {
 };
 const initialStateDetails = {
   wool: {},
+  loading: false,
+  error: null,
+};
+const initialStateDelete = {
+  success: false,
   loading: false,
   error: null,
 };
@@ -39,6 +47,19 @@ export const woolDetails = (state = initialStateDetails, action) => {
       return { ...state, loading: false, wool: action.payload };
     case WOOL_DETAILS_FAIL:
       return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const woolDelete = (state = initialStateDelete, action) => {
+  switch (action.type) {
+    case WOOL_DELETE_REQUEST:
+      return { ...state, loading: true, success: false };
+    case WOOL_DELETE_SUCCESS:
+      return { ...state, loading: false, success: true };
+    case WOOL_DELETE_FAIL:
+      return { loading: false, error: action.payload, success: false };
     default:
       return state;
   }

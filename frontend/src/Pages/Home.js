@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table, Image, Button, Row } from "react-bootstrap";
 
-import { fetchWools } from "../store/actions/wool";
+import { fetchWools, deleteWool } from "../store/actions/wool";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
@@ -13,16 +13,27 @@ function Home() {
   const woolList = useSelector((state) => state.woolList);
   const { loading, error, wools } = woolList;
 
+  const woolDelete = useSelector((state) => state.woolDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = woolDelete;
+
   useEffect(() => {
     dispatch(fetchWools());
-  }, [dispatch]);
+  }, [dispatch, successDelete]);
 
   const deleteHandler = (id) => {
-    console.log("Delete", id);
+    if (window.confirm("Estas segura Lorea?")) {
+      dispatch(deleteWool(id));
+    }
   };
 
   return (
     <>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
