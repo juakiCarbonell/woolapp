@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import { Form, Button, Row } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
 const WoolForm = ({ mode }) => {
@@ -27,11 +27,15 @@ const WoolForm = ({ mode }) => {
   return (
     <>
       <FormContainer>
-        <Row>
-          <h1>{isEditMode ? "Editar Lana" : "Crear Lana"}</h1>
-          <Link to="/" className="ml-auto">
-            <Button variant="outline-primary">Volver</Button>
-          </Link>
+        <Row className="align-items-center">
+          <Col>
+            <h1>{isEditMode ? "Editar Lana" : "Crear Lana"}</h1>
+          </Col>
+          <Col className="text-right">
+            <Link to="/" className="ml-auto">
+              <Button variant="outline-primary">Volver</Button>
+            </Link>
+          </Col>
         </Row>
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="brand">
