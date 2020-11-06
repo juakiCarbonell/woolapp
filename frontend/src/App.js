@@ -6,7 +6,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./Pages/Home";
 import Wool from "./Pages/Wool";
-import WoolForm from "./Pages/WoolForm";
+import WoolCreate from "./Pages/WoolCreate";
+import WoolEdit from "./Pages/WoolEdit";
 
 function App() {
   return (
@@ -19,10 +20,10 @@ function App() {
               <Home />
             </Route>
             <Route exact path="/wool/create">
-              <WoolForm mode="create" />
+              <WoolCreate mode="create" />
             </Route>
             <Route exact path="/wool/edit/:id">
-              <WoolForm mode="edit" />
+              <WoolEdit mode="edit" />
             </Route>
             <Route exact path="/wool/:id">
               <Wool />

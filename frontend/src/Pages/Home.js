@@ -101,7 +101,7 @@ function Home() {
                     </div>
                   </td>
                   <td className="align-middle">{wool.amount}</td>
-                  <td className="align-middle">{wool.length * wool.amount}m</td>
+                  <td className="align-middle">{wool.length * wool.weight}gr</td>
 
                   <td className="align-middle">
                     <Link to={`/wool/${wool._id}`}>

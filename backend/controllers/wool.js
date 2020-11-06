@@ -36,4 +36,71 @@ const deleteWool = asyncHandler(async (req, res) => {
   }
 });
 
-export { getWool, getWools, deleteWool };
+// @des     Create wool
+// @route   POST /wools/
+// @access  Public
+const createWool = asyncHandler(async (req, res) => {
+  const {
+    name,
+    brand,
+    image,
+    thickness,
+    length,
+    weight,
+    material,
+    color,
+    amount,
+  } = req.body;
+  const wool = new Wool({
+    name,
+    brand,
+    image,
+    thickness,
+    length,
+    weight,
+    material,
+    color,
+    amount,
+
+  });
+  const createdWool = await wool.save();
+  res.status(201).json(createdWool);
+});
+
+// @des     update wool
+// @route   PUT /wools/:id
+// @access  Public
+const updateWool = asyncHandler(async (req, res) => {
+  const {
+    name,
+    brand,
+    image,
+    thickness,
+    length,
+    weight,
+    material,
+    color,
+    amount,
+  } = req.body;
+
+  const wool = await Wool.findById(req.params.id);
+  if (wool) {
+    wool.name = name;
+    wool.brand = brand;
+    wool.image = image;
+    wool.thickness = thickness;
+    wool.length = length;
+    wool.weight = weight;
+    wool.material = material;
+    wool.color = color;
+    wool.amount = amount;
+    console.log(wool)
+    const updatedWool = await wool.save();
+    res.json(updatedWool);
+  } else {
+    res.status(404);
+    throw new Error("Wool not Found");
+  }
+});
+
+export { getWool, getWools, deleteWool, updateWool, createWool };

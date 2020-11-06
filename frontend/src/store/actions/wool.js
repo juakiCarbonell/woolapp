@@ -9,6 +9,12 @@ import {
   WOOL_DELETE_REQUEST,
   WOOL_DELETE_SUCCESS,
   WOOL_DELETE_FAIL,
+  WOOL_UPDATE_REQUEST,
+  WOOL_UPDATE_SUCCESS,
+  WOOL_UPDATE_FAIL,
+  WOOL_CREATE_REQUEST,
+  WOOL_CREATE_SUCCESS,
+  WOOL_CREATE_FAIL,
 } from "../costants/costants";
 
  // ############## FETCH ALL WOOLS ##############
@@ -118,3 +124,75 @@ export const deleteWool = (id) => async (dispatch) => {
   }
 };
  // ############## END DELETE WOOL ##############
+
+
+ // ############## CREATE WOOL ##############
+export const createWoolStart = () => {
+  return {
+    type: WOOL_CREATE_REQUEST,
+  };
+};
+
+export const createWoolSuccess = (data) => {
+  return {
+    type: WOOL_CREATE_SUCCESS,
+    payload: data,
+  };
+};
+export const createWoolError = (error) => {
+  return {
+    type: WOOL_CREATE_FAIL,
+    payload:
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+  };
+};
+
+export const createWool = (wool) => async (dispatch) => {
+  try {
+    dispatch(createWoolStart());
+
+    const { data } = await axios.post(`/wools`, wool );
+    dispatch(createWoolSuccess(data));
+  } catch (error) {
+    dispatch(createWoolError(error));
+  }
+};
+// ############## END CREATE WOOL ##############
+
+
+ // ############## UPDATE WOOL ##############
+export const updateWoolStart = () => {
+  return {
+    type: WOOL_UPDATE_REQUEST,
+  };
+};
+
+export const updateWoolSuccess = (data) => {
+  return {
+    type: WOOL_UPDATE_SUCCESS,
+    payload: data,
+  };
+};
+export const updateWoolError = (error) => {
+  return {
+    type: WOOL_UPDATE_FAIL,
+    payload:
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+  };
+};
+
+export const updateWool = (wool) => async (dispatch) => {
+  try {
+    dispatch(updateWoolStart());
+
+    const { data } = await axios.put(`/wools/${wool._id}`, wool);
+    dispatch(updateWoolSuccess(data));
+  } catch (error) {
+    dispatch(updateWoolError(error));
+  }
+};
+// ############## END UPDATE WOOL ##############

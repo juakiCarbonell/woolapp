@@ -2,9 +2,9 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { woolList, woolDetails, woolDelete } from "./reducers/wool";
+import { woolList, woolDetails, woolDelete, woolUpdate, woolCreate } from "./reducers/wool";
 
-const reducer = combineReducers({ woolList, woolDetails, woolDelete });
+const reducer = combineReducers({ woolList, woolDetails, woolDelete, woolUpdate, woolCreate });
 
 const initialState = {};
 

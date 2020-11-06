@@ -1,11 +1,13 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 
-const WoolForm = ({ mode }) => {
-  const isEditMode = mode === "edit" ? true : false;
+import { updateWool, fetchWool } from "../store/actions/wool";
+
+const WoolForm = () => {
+  let { id } = useParams();
   const [image, setImage] = useState("");
   const [brand, setBrand] = useState("");
   const [name, setName] = useState("");
@@ -16,12 +18,56 @@ const WoolForm = ({ mode }) => {
   const [color, setColor] = useState("");
   const [amount, setAmount] = useState(0);
 
+  const dispatch = useDispatch();
+
+  const woolUpdate = useSelector((state) => state.woolUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    wool: woolUpdated,
+  } = woolUpdate;
+
+  const woolDetails = useSelector((state) => state.woolDetails);
+  const { loading, error, wool } = woolDetails;
+
+  useEffect(() => {
+    if (!wool.name || wool._id !== id) {
+      console.log('if')
+      dispatch(fetchWool(id));
+    } else {
+      console.log("else");
+      setImage(wool.image);
+      setBrand(wool.brand);
+      setName(wool.name);
+      setThickness(wool.thickness);
+      setLength(wool.length);
+      setWeight(wool.weight);
+      setMaterial(wool.material);
+      setColor(wool.color);
+      setAmount(wool.amount);
+    }
+  }, [dispatch, id, wool]);
+
   const uploadFileHandler = () => {
     console.log("uoploas");
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(
+      updateWool({
+        name,
+        _id: id,
+        brand,
+        image,
+        thickness,
+        length,
+        weight,
+        material,
+        color,
+        amount,
+      })
+    );
   };
 
   return (
@@ -29,7 +75,7 @@ const WoolForm = ({ mode }) => {
       <FormContainer>
         <Row className="align-items-center">
           <Col>
-            <h1>{isEditMode ? "Editar Lana" : "Crear Lana"}</h1>
+            <h1>Editar Lana</h1>
           </Col>
           <Col className="text-right">
             <Link to="/" className="ml-auto">
@@ -84,11 +130,11 @@ const WoolForm = ({ mode }) => {
               <option value="1">Light fingering</option>
               <option value="2">Fingering</option>
               <option value="3">Sport</option>
-              <option value="4">Olc</option>
+              <option value="4">DK</option>
               <option value="5">Worsted</option>
               <option value="6">Aran</option>
-              <option value="7">Bullay</option>
-              <option value="8">Super Bullay</option>
+              <option value="7">Bulky</option>
+              <option value="8">Super Bulky</option>
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="length">
@@ -138,7 +184,7 @@ const WoolForm = ({ mode }) => {
           </Form.Group>
 
           <Button type="submit" variant="primary">
-            {isEditMode ? "Editar" : "Crear"}
+            Editar
           </Button>
         </Form>
       </FormContainer>
