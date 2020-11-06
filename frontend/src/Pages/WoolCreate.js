@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
+import Loader from "../components/Loader";
 
 import { createWool, createWoolReset } from "../store/actions/wool";
 
@@ -17,6 +19,7 @@ const WoolCreate = () => {
   const [material, setMaterial] = useState("");
   const [color, setColor] = useState("");
   const [amount, setAmount] = useState(0);
+  const [uploading, setUploading] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -24,13 +27,30 @@ const WoolCreate = () => {
   const { loading, error, wool, success } = woolCreate;
 
   useEffect(() => {
-    if(success) {
-      history.push('/')
+    if (success) {
+      history.push("/");
     }
-  }, [dispatch, success])
+  }, [dispatch, success]);
 
-  const uploadFileHandler = () => {
-    console.log("uoploas");
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/upload", formData, config);
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
   };
 
   const submitHandler = (e) => {
@@ -96,6 +116,7 @@ const WoolCreate = () => {
               custom
               onChange={uploadFileHandler}
             ></Form.File>
+            {uploading && <Loader />}
           </Form.Group>
           <Form.Group controlId="thickness">
             <Form.Label>Grossor</Form.Label>

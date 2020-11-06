@@ -94,7 +94,6 @@ const updateWool = asyncHandler(async (req, res) => {
     wool.material = material;
     wool.color = color;
     wool.amount = amount;
-    console.log(wool)
     const updatedWool = await wool.save();
     res.json(updatedWool);
   } else {

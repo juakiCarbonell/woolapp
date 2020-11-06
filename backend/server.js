@@ -1,8 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from 'path'
 import connectDB from "./config/db.js";
 
 import woolRoutes from "./routes/wool.js";
+import uploadRoutes from "./routes/upload.js";
 
 import { notFound, errorHandler } from "./middleware/error.js";
 
@@ -15,6 +17,10 @@ const app = express();
 app.use(express.json());
 
 app.use("/wools", woolRoutes);
+app.use("/upload", uploadRoutes);
+
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 app.use(notFound);
 
