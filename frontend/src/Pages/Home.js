@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table, Image, Button, Row } from "react-bootstrap";
+import Switch from "react-switch";
+
 
 import { fetchWools, deleteWool } from "../store/actions/wool";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
 function Home() {
+  const [modeTable, setModeTable] = useState(true)
   const dispatch = useDispatch();
 
   const woolList = useSelector((state) => state.woolList);
@@ -41,6 +44,18 @@ function Home() {
       ) : (
         <>
           <Row>
+            <span>Mostrar Tabla</span>
+            <Switch
+              onChange={() => setModeTable(!modeTable)}
+              checked={modeTable}
+              uncheckedIcon={false}
+              checkedIcon={false}
+              offHandleColor="#593196"
+              onHandleColor="#593196"
+              offColor="#CCC"
+              onColor="#CCC"
+              handleDiameter={30}
+            />
             <h1>Lanas</h1>
             <Link to="/wool/create" className="ml-auto">
               <Button variant="outline-primary">Crear Lana</Button>
@@ -101,7 +116,9 @@ function Home() {
                     </div>
                   </td>
                   <td className="align-middle">{wool.amount}</td>
-                  <td className="align-middle">{wool.length * wool.weight}gr</td>
+                  <td className="align-middle">
+                    {wool.length * wool.weight}gr
+                  </td>
 
                   <td className="align-middle">
                     <Link to={`/wool/${wool._id}`}>
