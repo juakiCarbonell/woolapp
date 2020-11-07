@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button } from "react-bootstrap";
 
-import { fetchWool } from "../store/actions/wool";
+import { fetchWool, deleteWool } from "../store/actions/wool";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
@@ -15,8 +15,15 @@ function Wool() {
   const { loading, error, wool } = woolDetails;
 
   useEffect(() => {
-    dispatch(fetchWool(id))
+    console.log("if");
+    dispatch(fetchWool(id));
   }, [id, dispatch]);
+
+  const deleteHandler = (id) => {
+    if (window.confirm("Estas segura Lorea?")) {
+      dispatch(deleteWool(id));
+    }
+  };
 
   return (
     <>
@@ -42,7 +49,7 @@ function Wool() {
             <Col md={6}>
               <Image src={wool.image} alt={wool.name} fluid />
             </Col>
-            <Col md={6}>
+            <Col md={3}>
               <ListGroup>
                 <ListGroup.Item
                   style={{ color: "black", backgroundColor: "white" }}
@@ -88,6 +95,20 @@ function Wool() {
                   {wool.amount * wool.length}m
                 </ListGroup.Item>
               </ListGroup>
+            </Col>
+            <Col md={3}>
+              <Link to={`/wool/edit/${wool._id}`}>
+                <Button variant="light" className="btn-sm">
+                  <i className="fas fa-edit"></i>
+                </Button>
+              </Link>
+              <Button
+                variant="danger"
+                className="btn-sm"
+                onClick={() => deleteHandler(wool._id)}
+              >
+                <i className="fas fa-trash"></i>
+              </Button>
             </Col>
           </Row>
         </Col>

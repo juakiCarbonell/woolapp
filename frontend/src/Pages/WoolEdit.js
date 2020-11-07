@@ -40,10 +40,11 @@ const WoolForm = () => {
   const { loading, error, wool } = woolDetails;
 
   useEffect(() => {
+    
     if (woolSuccess) {
       dispatch(updateWoolReset());
       dispatch(fetchWoolReset());
-      history.push("/");
+      history.push(`/wool/${id}`);
     } else {
       if (!wool.name || wool._id !== id) {
         dispatch(fetchWool(id));
@@ -108,7 +109,7 @@ const WoolForm = () => {
             <h1>Editar Lana</h1>
           </Col>
           <Col className="text-right">
-            <Link to="/" className="ml-auto">
+            <Link to={`/wool/${id}`} className="ml-auto">
               <Button variant="outline-primary">Volver</Button>
             </Link>
           </Col>
