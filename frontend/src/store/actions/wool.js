@@ -8,6 +8,7 @@ import {
   WOOL_DETAILS_FAIL,
   WOOL_DETAILS_RESET,
   WOOL_DELETE_REQUEST,
+  WOOL_DELETE_RESET,
   WOOL_DELETE_SUCCESS,
   WOOL_DELETE_FAIL,
   WOOL_UPDATE_REQUEST,
@@ -100,6 +101,11 @@ export const fetchWool = (id) => async (dispatch) => {
 
 
 // ############## DELETE WOOL ##############
+export const deleteWoolReset = () => {
+  return {
+    type: WOOL_DELETE_RESET,
+  };
+};
 export const deleteWoolStart = () => {
   return {
     type: WOOL_DELETE_REQUEST,

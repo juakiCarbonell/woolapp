@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Image, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const WoolTable = ({wools}) => {
+const WoolTable = ({ wools }) => {
   return (
     <Table striped bordered hover responsive className="text-center">
       <thead>
@@ -10,7 +10,8 @@ const WoolTable = ({wools}) => {
           <th></th>
           <th>MARCA</th>
           <th>NOMBRE</th>
-          <th className="d-flex align-items-center">
+          <th>GROSOR</th>
+          {/* <th className="d-flex align-items-center">
             <div className="mr-1">GROSOR</div>
             <div>
               <div>
@@ -24,7 +25,7 @@ const WoolTable = ({wools}) => {
                 </Button>
               </div>
             </div>
-          </th>
+          </th> */}
           <th>LONGITUD</th>
           <th>PESO</th>
           <th>MATERIAL</th>
@@ -46,7 +47,8 @@ const WoolTable = ({wools}) => {
             <td className="align-middle">{wool.length}m</td>
             <td className="align-middle">{wool.weight}gr</td>
             <td className="align-middle">{wool.material}gr</td>
-            <td className="align-middle">
+            <td className="align-middle">{wool.color}</td>
+            {/* <td className="align-middle">
               <div className="d-flex flex-column justify-content-center align-items-center">
                 {wool.color}
                 <div
@@ -57,7 +59,7 @@ const WoolTable = ({wools}) => {
                   }}
                 ></div>
               </div>
-            </td>
+            </td> */}
             <td className="align-middle">{wool.amount}</td>
             <td className="align-middle">{wool.length * wool.weight}gr</td>
 

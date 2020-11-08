@@ -8,6 +8,7 @@ import {
   WOOL_DETAILS_RESET,
   WOOL_DELETE_REQUEST,
   WOOL_DELETE_SUCCESS,
+  WOOL_DELETE_RESET,
   WOOL_DELETE_FAIL,
   WOOL_UPDATE_REQUEST,
   WOOL_UPDATE_SUCCESS,
@@ -28,7 +29,7 @@ const initialStateDetails = {
   wool: {},
   loading: false,
   error: null,
-  success: false
+  success: false,
 };
 const initialStateDelete = {
   success: false,
@@ -72,6 +73,8 @@ export const woolDelete = (state = initialStateDelete, action) => {
       return { ...state, loading: false, success: true };
     case WOOL_DELETE_FAIL:
       return { loading: false, error: action.payload, success: false };
+    case WOOL_DELETE_RESET:
+      return { ...initialStateDelete };
     default:
       return state;
   }

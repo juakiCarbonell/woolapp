@@ -4,7 +4,7 @@ import { Button, Row } from "react-bootstrap";
 import Switch from "react-switch";
 import { Link } from "react-router-dom";
 
-import { fetchWools, deleteWool } from "../store/actions/wool";
+import { fetchWools } from "../store/actions/wool";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import WoolTable from "../components/WoolTable";
@@ -17,32 +17,23 @@ function Home() {
   const woolList = useSelector((state) => state.woolList);
   const { loading, error, wools } = woolList;
 
-  const woolDelete = useSelector((state) => state.woolDelete);
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = woolDelete;
-
   useEffect(() => {
     dispatch(fetchWools());
-  }, [dispatch, successDelete]);
+  }, [dispatch]);
 
   return (
     <>
-      {loadingDelete && <Loader />}
-      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Row>
+          <Row className="my-4">
             <h1>Lanas</h1>
             <div className="ml-auto d-flex align-items-center">
-              <div className="d-flex align-items-center">
-                <span>Cambiar Vista</span>
+              <div className="d-flex align-items-center mx-4">
+                <span className="mr-2">Cambiar Vista</span>
                 <Switch
                   onChange={() => setModeTable(!modeTable)}
                   checked={modeTable}
@@ -56,7 +47,7 @@ function Home() {
                 />
               </div>
 
-              <Link to="/wool/create" className="ml-auto">
+              <Link to="/wool/create">
                 <Button variant="outline-primary">Crear Lana</Button>
               </Link>
             </div>
