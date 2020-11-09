@@ -37,6 +37,9 @@ const woolSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  left: {
+    type: Number
+  },
 }, {
   timestamps: true
 });

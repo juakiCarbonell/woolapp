@@ -44,11 +44,11 @@ export const fetchWoolsError = (error) => {
   };
 };
 
-export const fetchWools = () => async (dispatch) => {
+export const fetchWools = (field, order) => async (dispatch) => {
   try {
     dispatch(fetchWoolsStart());
 
-    const { data } = await axios.get("/wools");
+    const { data } = await axios.get(`/wools?field=${field}&order=${order}`);
     dispatch(fetchWoolsSuccess(data));
   } catch (error) {
     dispatch(fetchWoolsError(error));

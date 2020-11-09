@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Row } from "react-bootstrap";
 import Switch from "react-switch";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { fetchWools } from "../store/actions/wool";
 import Message from "../components/Message";
@@ -11,15 +11,18 @@ import WoolTable from "../components/WoolTable";
 import WoolCard from "../components/WoolCard";
 
 function Home() {
+  const { field = "", order = "" } = useParams();
+
   const [modeTable, setModeTable] = useState(true);
+
   const dispatch = useDispatch();
 
   const woolList = useSelector((state) => state.woolList);
   const { loading, error, wools } = woolList;
 
   useEffect(() => {
-    dispatch(fetchWools());
-  }, [dispatch]);
+    dispatch(fetchWools(field, order));
+  }, [dispatch, field, order]);
 
   return (
     <>

@@ -14,13 +14,18 @@ const Wool = ({wool}) => {
             <strong>{wool.name}</strong>
           </Card.Title>
         </Link>
-        {/* <Card.Text as="div">
-          <Rating
-            value={wool.rating}
-            text={`${wool.numReviews} reviews`}
-          />
+        <Card.Text>
+          <strong>Grosor: </strong>
+          {wool.thickness}
         </Card.Text>
-        <Card.Text as="h3">{wool.price}&euro;</Card.Text> */}
+        <Card.Text>
+          <strong>Grosor: </strong>
+          {wool.thickness}
+        </Card.Text>
+        <Card.Text>
+          <strong>Restante: </strong>
+          {wool.length * wool.weight}gr
+        </Card.Text>
       </Card.Body>
     </Card>
   );

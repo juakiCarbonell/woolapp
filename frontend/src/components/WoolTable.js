@@ -2,36 +2,87 @@ import React from "react";
 import { Table, Image, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+import ButtonSort from "./ButtonSort";
+
 const WoolTable = ({ wools }) => {
   return (
     <Table striped bordered hover responsive className="text-center">
       <thead>
         <tr>
           <th></th>
-          <th>MARCA</th>
-          <th>NOMBRE</th>
-          <th>GROSOR</th>
-          {/* <th className="d-flex align-items-center">
-            <div className="mr-1">GROSOR</div>
-            <div>
-              <div>
-                <Button variant="outline-secondary" className="btn-sm">
-                  <i className="fas fa-sort-up"></i>
-                </Button>
-              </div>
-              <div>
-                <Button variant="outline-secondary" className="btn-sm">
-                  <i className="fas fa-sort-down"></i>
-                </Button>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>MARCA</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="brand" icon="up" />
+                <ButtonSort order="desc" field="brand" icon="down" />
               </div>
             </div>
-          </th> */}
-          <th>LONGITUD</th>
-          <th>PESO</th>
-          <th>MATERIAL</th>
-          <th>COLOR</th>
-          <th>CANTIDAD</th>
-          <th>TOTAL</th>
+          </th>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>NOMBRE</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="name" icon="up" />
+                <ButtonSort order="desc" field="name" icon="down" />
+              </div>
+            </div>
+          </th>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>GROSOR</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="thickness" icon="up" />
+                <ButtonSort order="desc" field="thickness" icon="down" />
+              </div>
+            </div>
+          </th>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>LONGITUD</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="length" icon="up" />
+                <ButtonSort order="desc" field="length" icon="down" />
+              </div>
+            </div>
+          </th>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>PESO</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="weight" icon="up" />
+                <ButtonSort order="desc" field="weight" icon="down" />
+              </div>
+            </div>
+          </th>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>MATERIAL</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="material" icon="up" />
+                <ButtonSort order="desc" field="material" icon="down" />
+              </div>
+            </div>
+          </th>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>COLOR</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="color" icon="up" />
+                <ButtonSort order="desc" field="color" icon="down" />
+              </div>
+            </div>
+          </th>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>CANTIDAD</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="amount" icon="up" />
+                <ButtonSort order="desc" field="camount" icon="down" />
+              </div>
+            </div>
+          </th>
+          <th>RESTANTE</th>
           <th></th>
         </tr>
       </thead>
@@ -46,20 +97,8 @@ const WoolTable = ({ wools }) => {
             <td className="align-middle">{wool.thickness}mm</td>
             <td className="align-middle">{wool.length}m</td>
             <td className="align-middle">{wool.weight}gr</td>
-            <td className="align-middle">{wool.material}gr</td>
+            <td className="align-middle">{wool.material}</td>
             <td className="align-middle">{wool.color}</td>
-            {/* <td className="align-middle">
-              <div className="d-flex flex-column justify-content-center align-items-center">
-                {wool.color}
-                <div
-                  style={{
-                    backgroundColor: `${wool.color}`,
-                    width: "40px",
-                    height: "40px",
-                  }}
-                ></div>
-              </div>
-            </td> */}
             <td className="align-middle">{wool.amount}</td>
             <td className="align-middle">{wool.length * wool.weight}gr</td>
 

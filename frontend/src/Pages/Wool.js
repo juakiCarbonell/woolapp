@@ -23,7 +23,6 @@ function Wool() {
   } = woolDelete;
 
   useEffect(() => {
-    console.log('succ', successDelete)
     if (successDelete) {
       dispatch(deleteWoolReset());
       history.push(`/`);
@@ -107,8 +106,7 @@ function Wool() {
                   <ListGroup.Item
                     style={{ color: "black", backgroundColor: "white" }}
                   >
-                    <strong>Longitud Restante:</strong>{" "}
-                    {wool.amount * wool.length}m
+                    <strong>Restante:</strong> {wool.length * wool.weight}gr
                   </ListGroup.Item>
                 </ListGroup>
               </Col>

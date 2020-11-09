@@ -5,7 +5,17 @@ import Wool from "../models/wool.js";
 // @route   GET /
 // @access  Public
 const getWools = asyncHandler(async (req, res) => {
-  const wools = await Wool.find({});
+  const field = req.query.field;
+  const order = req.query.order;
+  let wools;
+  const sort = {};
+  sort[field] = order;
+  if (field.length === 0 && order.length === 0) {
+    wools = await Wool.find({});
+  } else {
+    wools = await Wool.find({}).sort(sort);
+  }
+
   res.send(wools);
 });
 
@@ -61,7 +71,6 @@ const createWool = asyncHandler(async (req, res) => {
     material,
     color,
     amount,
-
   });
   const createdWool = await wool.save();
   res.status(201).json(createdWool);
