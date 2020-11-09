@@ -106,7 +106,7 @@ function Wool() {
                   <ListGroup.Item
                     style={{ color: "black", backgroundColor: "white" }}
                   >
-                    <strong>Restante:</strong> {wool.length * wool.weight}gr
+                    <strong>Restante:</strong> {wool.left}gr
                   </ListGroup.Item>
                 </ListGroup>
               </Col>

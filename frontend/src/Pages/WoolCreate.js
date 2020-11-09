@@ -182,7 +182,7 @@ const WoolCreate = () => {
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId="color">
-                <Form.Label>color</Form.Label>
+                <Form.Label>Color</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Color"

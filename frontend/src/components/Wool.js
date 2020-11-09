@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Wool = ({wool}) => {
+const Wool = ({ wool }) => {
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/wool/${wool._id}`}>
@@ -24,7 +24,7 @@ const Wool = ({wool}) => {
         </Card.Text>
         <Card.Text>
           <strong>Restante: </strong>
-          {wool.length * wool.weight}gr
+          {wool.left}gr
         </Card.Text>
       </Card.Body>
     </Card>

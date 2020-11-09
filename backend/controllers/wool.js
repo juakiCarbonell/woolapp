@@ -61,6 +61,7 @@ const createWool = asyncHandler(async (req, res) => {
     color,
     amount,
   } = req.body;
+  const left = amount * weight
   const wool = new Wool({
     name,
     brand,
@@ -71,6 +72,7 @@ const createWool = asyncHandler(async (req, res) => {
     material,
     color,
     amount,
+    left
   });
   const createdWool = await wool.save();
   res.status(201).json(createdWool);
@@ -91,6 +93,7 @@ const updateWool = asyncHandler(async (req, res) => {
     color,
     amount,
   } = req.body;
+  const left = amount * weight;
 
   const wool = await Wool.findById(req.params.id);
   if (wool) {
@@ -103,6 +106,7 @@ const updateWool = asyncHandler(async (req, res) => {
     wool.material = material;
     wool.color = color;
     wool.amount = amount;
+    wool.left = left;
     const updatedWool = await wool.save();
     res.json(updatedWool);
   } else {

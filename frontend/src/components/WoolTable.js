@@ -78,11 +78,19 @@ const WoolTable = ({ wools }) => {
               <div>CANTIDAD</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="amount" icon="up" />
-                <ButtonSort order="desc" field="camount" icon="down" />
+                <ButtonSort order="desc" field="amount" icon="down" />
               </div>
             </div>
           </th>
-          <th>RESTANTE</th>
+          <th>
+            <div className="d-flex align-items-center">
+              <div>RESTANTE</div>
+              <div className="d-flex flex-column">
+                <ButtonSort order="asc" field="left" icon="up" />
+                <ButtonSort order="desc" field="left" icon="down" />
+              </div>
+            </div>
+          </th>
           <th></th>
         </tr>
       </thead>
@@ -100,7 +108,7 @@ const WoolTable = ({ wools }) => {
             <td className="align-middle">{wool.material}</td>
             <td className="align-middle">{wool.color}</td>
             <td className="align-middle">{wool.amount}</td>
-            <td className="align-middle">{wool.length * wool.weight}gr</td>
+            <td className="align-middle">{wool.left}gr</td>
 
             <td className="align-middle">
               <Link to={`/wool/${wool._id}`}>
