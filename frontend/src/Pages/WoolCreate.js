@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import { Formik } from "formik";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
@@ -72,182 +72,191 @@ const WoolCreate = () => {
     );
   };
 
-  const formik = useFormik({
-    initialValues: {
-      name: 0,
-      brand: 0,
-      image: 0,
-      thickness: 0,
-      length: 0,
-      weight: 0,
-      material: 0,
-      color: 0,
-      amount: 0,
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  // const formik = useFormik({
+  //   initialValues: {
+  //     name: 0,
+  //     brand: 0,
+  //     image: 0,
+  //     thickness: 0,
+  //     length: 0,
+  //     weight: 0,
+  //     material: 0,
+  //     color: 0,
+  //     amount: 0,
+  //   },
+  //   onSubmit: (values) => {
+  //     alert(JSON.stringify(values, null, 2));
+  //   },
+  // });
 
-  const MyField = (props) => {
-    
-
-  }
+  const test = (e) => {
+    console.log('test', e)
+  };
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <>
-          <FormContainer>
-            <Row className="align-items-center">
-              <Col>
-                <h1>Crear Lana</h1>
-              </Col>
-              <Col className="text-right">
-                <Link to="/" className="ml-auto">
-                  <Button variant="outline-primary">Volver</Button>
-                </Link>
-              </Col>
-            </Row>
-            <Form onSubmit={formik.handleSubmit}>
-              <Form.Group controlId="brand">
-                <Form.Label htmlFor="brand">Marca</Form.Label>
-                <Form.Control
-                  placeholder="Marca"
-                  type="text"
-                  id="brand"
-                  name="brand"
-                  onChange={formik.handleChange}
-                  value={formik.values.brand}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="name">
-                <Form.Label htmlFor="name">Name</Form.Label>
+      <Formik
+        initialValues={{
+          name: "",
+          brand: "",
+          image: "",
+          thickness: "",
+          length: "",
+          weight: "",
+          material: "",
+          color: "",
+          amount: "",
+        }}
+        validate={(values) => {
+          const errors = {};
+          if (!values.email) {
+            errors.email = "Required";
+          }
+          return errors;
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          setFieldValue,
+          /* and other goodies */
+        }) => {
+          console.log(values)
+          return (
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <Form.Label>Nombre</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Nombre"
-                  id="name"
                   name="name"
-                  onChange={formik.handleChange}
-                  value={formik.values.name}
-                ></Form.Control>
+                  id="name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                {errors.name && touched.name && errors.name}
               </Form.Group>
-
-
-
-              <Form.Group controlId="image">
+              <Form.Group>
+                <Form.Label>Marca</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="brand"
+                  id="brand"
+                  placeholder="Marca"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.brand}
+                />
+                {errors.brand && touched.brand && errors.brand}
+              </Form.Group>
+              <Form.Group>
                 <Form.Label>Image</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Imagen url"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                ></Form.Control>
-                <Form.File
-                  id="image-file"
-                  label="Archivo"
-                  custom
-                  onChange={uploadFileHandler}
-                ></Form.File>
-                {uploading && <Loader />}
+                  type="file"
+                  name="image"
+                  placeholder="Imagen"
+                  id="image"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  // value={values.image}
+                  onChange={async (e) => {
+                    const file = e.target.files[0];
+                    const formData = new FormData();
+                    formData.append("image", file);
+                    setUploading(true);
+
+                    try {
+                      const config = {
+                        headers: {
+                          "Content-type": "multipart/form-data",
+                        },
+                      };
+                      const { data } = await axios.post(
+                        "/upload",
+                        formData,
+                        config
+                      );
+                      setFieldValue("image", data);
+                      setUploading(false);
+                    } catch (error) {
+                      console.error(error);
+                      setUploading(false);
+                    }
+                  }}
+                />
+                {errors.image && touched.image && errors.image}
+                {values.image && <Image src={values.image} />}
               </Form.Group>
 
-
-
-              <Form.Group controlId="thickness">
-                <Form.Label htmlFor="thickness">Grossor</Form.Label>
+              <Form.Group>
+                <Form.Label>Grossor</Form.Label>
                 <Form.Control
-                  title="Grossor"
+                  title="Grosor"
                   as="select"
-                  placeholder="Grossor"
-                  id="thickness"
                   name="thickness"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
+                  id="thickness"
+                  placeholder="Grossor"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.thickness}
                 >
-                  <option value="">Seleciona Grosor</option>
-                  <option value="0">Lace</option>
-                  <option value="1">Light fingering</option>
-                  <option value="2">Fingering</option>
-                  <option value="3">Sport</option>
-                  <option value="4">DK</option>
-                  <option value="5">Worsted</option>
-                  <option value="6">Aran</option>
-                  <option value="7">Bulky</option>
-                  <option value="8">Super Bulky</option>
+                  <option value="">Elige Grosor</option>
+                  <option value="lace">Lace</option>
+                  <option value="light_fingering">Light fingering</option>
+                  <option value="fingering">Fingering</option>
+                  <option value="sport">Sport</option>
+                  <option value="dk">DK</option>
+                  <option value="worsted">Worsted</option>
+                  <option value="aran">Aran</option>
+                  <option value="bulky">Bulky</option>
+                  <option value="super_bulki">Super Bulky</option>
                 </Form.Control>
               </Form.Group>
-              <Form.Group controlId="length">
-                <Form.Label htmlFor="length">Longitud (M)</Form.Label>
+              <Form.Group>
+                <Form.Label>Longitud (M)</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder="Longitud"
-                  id="length"
+                  placeholder="Longitug"
                   name="length"
-                  onChange={formik.handleChange}
-                  value={formik.values.length}
-                ></Form.Control>
+                  id="length"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.length}
+                />
+                {errors.length && touched.length && errors.length}
               </Form.Group>
-              <Form.Group controlId="weight">
-                <Form.Label htmlFor="weight">Peso (Gr)</Form.Label>
+              <Form.Group>
+                <Form.Label>Cantidad</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder="Peso"
-                  id="weight"
-                  name="weight"
-                  min="0"
-                  step="1"
-                  onChange={formik.handleChange}
-                  value={formik.values.weight}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="amount">
-                <Form.Label htmlFor="amount">Cantidad</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Cantidad"
-                  id="amount"
-                  min="0"
-                  step="1"
                   name="amount"
-                  onChange={formik.handleChange}
-                  value={formik.values.amount}
-                ></Form.Control>
+                  id="amount"
+                  placeholder="Cantidad"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.amount}
+                />
+                {errors.amount && touched.amount && errors.amount}
               </Form.Group>
-              <Form.Group controlId="material">
-                <Form.Label htmlFor="material">Material</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Material"
-                  id="material"
-                  name="material"
-                  onChange={formik.handleChange}
-                  value={formik.values.material}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="color">
-                <Form.Label htmlFor="color">Color</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Color"
-                  id="color"
-                  name="color"
-                  onChange={formik.handleChange}
-                  value={formik.values.color}
-                ></Form.Control>
-              </Form.Group>
-
               <Button type="submit" variant="primary">
-                Crear
+                Sutmit
               </Button>
             </Form>
-          </FormContainer>
-        </>
-      )}
+          );
+        }}
+      </Formik>
     </>
   );
 };
