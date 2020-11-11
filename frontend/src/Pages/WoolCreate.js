@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useFormik } from "formik";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
@@ -20,7 +21,7 @@ const WoolCreate = () => {
   const [material, setMaterial] = useState("");
   const [color, setColor] = useState("");
   const [amount, setAmount] = useState(0);
-  const [uploading, setUploading] = useState(0);
+  const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -71,6 +72,28 @@ const WoolCreate = () => {
     );
   };
 
+  const formik = useFormik({
+    initialValues: {
+      name: 0,
+      brand: 0,
+      image: 0,
+      thickness: 0,
+      length: 0,
+      weight: 0,
+      material: 0,
+      color: 0,
+      amount: 0,
+    },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  const MyField = (props) => {
+    
+
+  }
+
   return (
     <>
       {loading ? (
@@ -90,25 +113,32 @@ const WoolCreate = () => {
                 </Link>
               </Col>
             </Row>
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={formik.handleSubmit}>
               <Form.Group controlId="brand">
-                <Form.Label>Marca</Form.Label>
+                <Form.Label htmlFor="brand">Marca</Form.Label>
                 <Form.Control
-                  type="text"
                   placeholder="Marca"
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
+                  type="text"
+                  id="brand"
+                  name="brand"
+                  onChange={formik.handleChange}
+                  value={formik.values.brand}
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
+                <Form.Label htmlFor="name">Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Nombre"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  id="name"
+                  name="name"
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
                 ></Form.Control>
               </Form.Group>
+
+
+
               <Form.Group controlId="image">
                 <Form.Label>Image</Form.Label>
                 <Form.Control
@@ -125,15 +155,21 @@ const WoolCreate = () => {
                 ></Form.File>
                 {uploading && <Loader />}
               </Form.Group>
+
+
+
               <Form.Group controlId="thickness">
-                <Form.Label>Grossor</Form.Label>
+                <Form.Label htmlFor="thickness">Grossor</Form.Label>
                 <Form.Control
-                  title="Bla"
+                  title="Grossor"
                   as="select"
                   placeholder="Grossor"
-                  value={thickness}
-                  onChange={(e) => setThickness(e.target.value)}
+                  id="thickness"
+                  name="thickness"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
                 >
+                  <option value="">Seleciona Grosor</option>
                   <option value="0">Lace</option>
                   <option value="1">Light fingering</option>
                   <option value="2">Fingering</option>
@@ -146,48 +182,62 @@ const WoolCreate = () => {
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId="length">
-                <Form.Label>Longitud</Form.Label>
+                <Form.Label htmlFor="length">Longitud (M)</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder="Enter length"
-                  value={length}
-                  onChange={(e) => setLength(e.target.value)}
+                  placeholder="Longitud"
+                  id="length"
+                  name="length"
+                  onChange={formik.handleChange}
+                  value={formik.values.length}
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId="weight">
-                <Form.Label>Peso</Form.Label>
+                <Form.Label htmlFor="weight">Peso (Gr)</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Peso"
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
+                  id="weight"
+                  name="weight"
+                  min="0"
+                  step="1"
+                  onChange={formik.handleChange}
+                  value={formik.values.weight}
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId="amount">
-                <Form.Label>Cantidad</Form.Label>
+                <Form.Label htmlFor="amount">Cantidad</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Cantidad"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  id="amount"
+                  min="0"
+                  step="1"
+                  name="amount"
+                  onChange={formik.handleChange}
+                  value={formik.values.amount}
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId="material">
-                <Form.Label>Material</Form.Label>
+                <Form.Label htmlFor="material">Material</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Material"
-                  value={material}
-                  onChange={(e) => setMaterial(e.target.value)}
+                  id="material"
+                  name="material"
+                  onChange={formik.handleChange}
+                  value={formik.values.material}
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId="color">
-                <Form.Label>Color</Form.Label>
+                <Form.Label htmlFor="color">Color</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Color"
-                  value={color}
-                  onChange={(e) => setColor(e.target.value)}
+                  id="color"
+                  name="color"
+                  onChange={formik.handleChange}
+                  value={formik.values.color}
                 ></Form.Control>
               </Form.Group>
 
