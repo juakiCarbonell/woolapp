@@ -41,6 +41,7 @@ const WoolForm = () => {
   const { loading, error, wool } = woolDetails;
 
   useEffect(() => {
+    console.log('effect')
     if (woolSuccess) {
       console.log("1");
       dispatch(updateWoolReset());
@@ -66,43 +67,32 @@ const WoolForm = () => {
   }, [dispatch, id, wool, woolSuccess, history]);
 
   const submitHandler = (values) => {
-    dispatch(updateWool({ ...values }));
+    dispatch(updateWool({ ...values, _id: id }));
   };
 
-  let initialValues = {
-    name,
-    brand,
-    image,
-    thickness,
-    length,
-    weight,
-    material,
-    color,
-    amount,
-  };
-  // let initalValues = wool
-  //   ? {
-  //       name: wool.name,
-  //       brand: wool.brand,
-  //       image: wool.image,
-  //       thickness: wool.thickness,
-  //       length: wool.length,
-  //       weight: wool.weight,
-  //       material: wool.material,
-  //       color: wool.color,
-  //       amount: wool.amount,
-  //     }
-  //   : {
-  //       name: "",
-  //       brand: "",
-  //       image: "",
-  //       thickness: "",
-  //       length: "",
-  //       weight: "",
-  //       material: "",
-  //       color: "",
-  //       amount: "",
-  //     }; ;
+  let initialValues = wool
+    ? {
+        name: wool.name,
+        brand: wool.brand,
+        image: wool.image,
+        thickness: wool.thickness,
+        length: wool.length,
+        weight: wool.weight,
+        material: wool.material,
+        color: wool.color,
+        amount: wool.amount,
+      }
+    : {
+        name: "",
+        brand: "",
+        image: "",
+        thickness: "",
+        length: "",
+        weight: "",
+        material: "",
+        color: "",
+        amount: "",
+      }; ;
 
   console.log("loading", loading);
   console.log("error", error);
