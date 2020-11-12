@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Formik } from "formik";
+import { ErrorMessage, Field, Formik } from "formik";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Image } from "react-bootstrap";
@@ -13,15 +13,15 @@ import { createWool } from "../store/actions/wool";
 const WoolCreate = () => {
   let history = useHistory();
   const [image, setImage] = useState("");
-  const [brand, setBrand] = useState("");
-  const [name, setName] = useState("");
-  const [thickness, setThickness] = useState("");
-  const [length, setLength] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [material, setMaterial] = useState("");
-  const [color, setColor] = useState("");
-  const [amount, setAmount] = useState(0);
   const [uploading, setUploading] = useState(false);
+  // const [brand, setBrand] = useState("");
+  // const [name, setName] = useState("");
+  // const [thickness, setThickness] = useState("");
+  // const [length, setLength] = useState(0);
+  // const [weight, setWeight] = useState(0);
+  // const [material, setMaterial] = useState("");
+  // const [color, setColor] = useState("");
+  // const [amount, setAmount] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -55,43 +55,22 @@ const WoolCreate = () => {
     }
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      createWool({
-        name,
-        brand,
-        image,
-        thickness,
-        length,
-        weight,
-        material,
-        color,
-        amount,
-      })
-    );
-  };
-
-  // const formik = useFormik({
-  //   initialValues: {
-  //     name: 0,
-  //     brand: 0,
-  //     image: 0,
-  //     thickness: 0,
-  //     length: 0,
-  //     weight: 0,
-  //     material: 0,
-  //     color: 0,
-  //     amount: 0,
-  //   },
-  //   onSubmit: (values) => {
-  //     alert(JSON.stringify(values, null, 2));
-  //   },
-  // });
-
-  const test = (e) => {
-    console.log('test', e)
-  };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(
+  //     createWool({
+  //       name,
+  //       brand,
+  //       image,
+  //       thickness,
+  //       length,
+  //       weight,
+  //       material,
+  //       color,
+  //       amount,
+  //     })
+  //   );
+  // };
 
   return (
     <>
@@ -109,12 +88,37 @@ const WoolCreate = () => {
         }}
         validate={(values) => {
           const errors = {};
-          if (!values.email) {
-            errors.email = "Required";
+          if (!values.name) {
+            errors.name = "Required";
+          }
+          if (!values.brand) {
+            errors.brand = "Required";
+          }
+          if (!values.image) {
+            errors.image = "Required";
+          }
+          if (!values.thickness) {
+            errors.thickness = "Required";
+          }
+          if (!values.length) {
+            errors.length = "Required";
+          }
+          if (!values.weight) {
+            errors.weight = "Required";
+          }
+          if (!values.material) {
+            errors.material = "Required";
+          }
+          if (!values.color) {
+            errors.color = "Required";
+          }
+          if (!values.amount) {
+            errors.amount = "Required";
           }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
+          console.log("sub", values);
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
@@ -127,12 +131,11 @@ const WoolCreate = () => {
           touched,
           handleChange,
           handleBlur,
-          handleSubmit,
           isSubmitting,
+          handleSubmit,
           setFieldValue,
           /* and other goodies */
         }) => {
-          console.log(values)
           return (
             <Form onSubmit={handleSubmit}>
               <Form.Group>
@@ -163,14 +166,14 @@ const WoolCreate = () => {
               </Form.Group>
               <Form.Group>
                 <Form.Label>Image</Form.Label>
-                <Form.Control
+                <Form.File
                   type="file"
                   name="image"
                   placeholder="Imagen"
                   id="image"
-                  onChange={handleChange}
+                  label="Elige Imagen"
+                  custom
                   onBlur={handleBlur}
-                  // value={values.image}
                   onChange={async (e) => {
                     const file = e.target.files[0];
                     const formData = new FormData();
@@ -197,6 +200,7 @@ const WoolCreate = () => {
                   }}
                 />
                 {errors.image && touched.image && errors.image}
+                {uploading && <Loader />}
                 {values.image && <Image src={values.image} />}
               </Form.Group>
 
@@ -238,6 +242,32 @@ const WoolCreate = () => {
                 {errors.length && touched.length && errors.length}
               </Form.Group>
               <Form.Group>
+                <Form.Label>Material</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="material"
+                  id="material"
+                  placeholder="Material"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.material}
+                />
+                {errors.material && touched.material && errors.material}
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Peso (Gr)</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="weight"
+                  id="weight"
+                  placeholder="Cantidad"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.weight}
+                />
+                {errors.weight && touched.weight && errors.weight}
+              </Form.Group>
+              <Form.Group>
                 <Form.Label>Cantidad</Form.Label>
                 <Form.Control
                   type="number"
@@ -250,8 +280,8 @@ const WoolCreate = () => {
                 />
                 {errors.amount && touched.amount && errors.amount}
               </Form.Group>
-              <Button type="submit" variant="primary">
-                Sutmit
+              <Button type="submit" variant="primary" disabled={isSubmitting}>
+                Crear Lana
               </Button>
             </Form>
           );
