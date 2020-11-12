@@ -118,11 +118,8 @@ const WoolCreate = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log("sub", values);
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          console.log("sub", {...values});
+          dispatch(createWool({...values}))
         }}
       >
         {({
@@ -253,6 +250,19 @@ const WoolCreate = () => {
                   value={values.material}
                 />
                 {errors.material && touched.material && errors.material}
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Caterial</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="color"
+                  id="color"
+                  placeholder="Color"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.color}
+                />
+                {errors.color && touched.color && errors.color}
               </Form.Group>
               <Form.Group>
                 <Form.Label>Peso (Gr)</Form.Label>

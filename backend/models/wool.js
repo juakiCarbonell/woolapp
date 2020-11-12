@@ -14,7 +14,7 @@ const woolSchema = mongoose.Schema({
     required: true,
   },
   thickness: {
-    type: Number,
+    type: String,
     required: true,
   },
   length: {
