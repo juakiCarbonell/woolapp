@@ -65,6 +65,28 @@ const wools = [
     color: "coral",
     amount: 2,
   },
+  {
+    image: "/images/lana6.jpg",
+    brand: "Angela",
+    name: "Angelity",
+    thickness: 0.5,
+    length: 2,
+    weight: 0.5,
+    material: "Wool",
+    color: "coral",
+    amount: 2,
+  },
+  {
+    image: "/images/lana6.jpg",
+    brand: "Angela",
+    name: "Angelity",
+    thickness: 0.5,
+    length: 2,
+    weight: 0.5,
+    material: "Wool",
+    color: "coral",
+    amount: 2,
+  },
 ];
 
 export default wools;

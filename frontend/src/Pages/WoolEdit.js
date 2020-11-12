@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import FormmikContainer from "../components/FormikContainer";
 
 import {
   updateWool,
@@ -26,7 +27,6 @@ const WoolForm = () => {
   const [material, setMaterial] = useState("");
   const [color, setColor] = useState("");
   const [amount, setAmount] = useState(0);
-  const [uploading, setUploading] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -42,13 +42,16 @@ const WoolForm = () => {
 
   useEffect(() => {
     if (woolSuccess) {
+      console.log("1");
       dispatch(updateWoolReset());
       dispatch(fetchWoolReset());
       history.push(`/wool/${id}`);
     } else {
       if (!wool.name || wool._id !== id) {
+        console.log("2");
         dispatch(fetchWool(id));
       } else {
+        console.log("3");
         setImage(wool.image);
         setBrand(wool.brand);
         setName(wool.name);
@@ -62,44 +65,48 @@ const WoolForm = () => {
     }
   }, [dispatch, id, wool, woolSuccess, history]);
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-    setUploading(true);
-
-    try {
-      const config = {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      };
-      const { data } = await axios.post("/upload", formData, config);
-      setImage(data);
-      setUploading(false);
-    } catch (error) {
-      console.error(error);
-      setUploading(false);
-    }
+  const submitHandler = (values) => {
+    dispatch(updateWool({ ...values }));
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      updateWool({
-        name,
-        _id: id,
-        brand,
-        image,
-        thickness,
-        length,
-        weight,
-        material,
-        color,
-        amount,
-      })
-    );
+  let initialValues = {
+    name,
+    brand,
+    image,
+    thickness,
+    length,
+    weight,
+    material,
+    color,
+    amount,
   };
+  // let initalValues = wool
+  //   ? {
+  //       name: wool.name,
+  //       brand: wool.brand,
+  //       image: wool.image,
+  //       thickness: wool.thickness,
+  //       length: wool.length,
+  //       weight: wool.weight,
+  //       material: wool.material,
+  //       color: wool.color,
+  //       amount: wool.amount,
+  //     }
+  //   : {
+  //       name: "",
+  //       brand: "",
+  //       image: "",
+  //       thickness: "",
+  //       length: "",
+  //       weight: "",
+  //       material: "",
+  //       color: "",
+  //       amount: "",
+  //     }; ;
+
+  console.log("loading", loading);
+  console.log("error", error);
+  console.log("wool", wool);
 
   return (
     <>
@@ -122,111 +129,11 @@ const WoolForm = () => {
                 </Link>
               </Col>
             </Row>
-            <Form onSubmit={submitHandler}>
-              <Form.Group controlId="brand">
-                <Form.Label>Marca</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Marca"
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Nombre"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="image">
-                <Form.Label>Image</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Imagen url"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                ></Form.Control>
-                <Form.File
-                  id="image-file"
-                  label="Archivo"
-                  custom
-                  onChange={uploadFileHandler}
-                ></Form.File>
-                {uploading && <Loader />}
-              </Form.Group>
-              <Form.Group controlId="thickness">
-                <Form.Label>Grossor</Form.Label>
-                <Form.Control
-                  title="Bla"
-                  as="select"
-                  placeholder="Grossor"
-                  value={thickness}
-                  onChange={(e) => setThickness(e.target.value)}
-                >
-                  <option value="0">Lace</option>
-                  <option value="1">Light fingering</option>
-                  <option value="2">Fingering</option>
-                  <option value="3">Sport</option>
-                  <option value="4">DK</option>
-                  <option value="5">Worsted</option>
-                  <option value="6">Aran</option>
-                  <option value="7">Bulky</option>
-                  <option value="8">Super Bulky</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group controlId="length">
-                <Form.Label>Longitud</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter length"
-                  value={length}
-                  onChange={(e) => setLength(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="weight">
-                <Form.Label>Peso</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Peso"
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="amount">
-                <Form.Label>Cantidad</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Cantidad"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="material">
-                <Form.Label>Material</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Material"
-                  value={material}
-                  onChange={(e) => setMaterial(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="color">
-                <Form.Label>Color</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Color"
-                  value={color}
-                  onChange={(e) => setColor(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-
-              <Button type="submit" variant="primary">
-                Editar
-              </Button>
-            </Form>
+            <FormmikContainer
+              submitHandler={submitHandler}
+              initialValues={initialValues}
+              submitText="Editar Lana"
+            />
           </FormContainer>
         </>
       )}
