@@ -14,23 +14,25 @@ function App() {
     <Router>
       <Header />
       <main className="py-3">
-        <Switch>
-          <Route exact path="/sortby/:field/:order">
-            <Home />
-          </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/wool/create">
-            <WoolCreate mode="create" />
-          </Route>
-          <Route exact path="/wool/edit/:id">
-            <WoolEdit mode="edit" />
-          </Route>
-          <Route exact path="/wool/:id">
-            <Wool />
-          </Route>
-        </Switch>
+        <Container>
+          <Switch>
+            <Route exact path="/sortby/:field/:order">
+              <Home />
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/wool/create">
+              <WoolCreate mode="create" />
+            </Route>
+            <Route exact path="/wool/edit/:id">
+              <WoolEdit mode="edit" />
+            </Route>
+            <Route exact path="/wool/:id">
+              <Wool />
+            </Route>
+          </Switch>
+        </Container>
       </main>
       <Footer />
     </Router>

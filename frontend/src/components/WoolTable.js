@@ -12,81 +12,81 @@ const WoolTable = ({ wools }) => {
           <th></th>
           <th>
             <div className="d-flex align-items-center">
-              <div>MARCA</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="brand" icon="up" />
+                <div>MARCA</div>
                 <ButtonSort order="desc" field="brand" icon="down" />
               </div>
             </div>
           </th>
           <th>
             <div className="d-flex align-items-center">
-              <div>NOMBRE</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="name" icon="up" />
+                <div>NOMBRE</div>
                 <ButtonSort order="desc" field="name" icon="down" />
               </div>
             </div>
           </th>
           <th>
             <div className="d-flex align-items-center">
-              <div>GROSOR</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="thickness" icon="up" />
+                <div>GROSOR</div>
                 <ButtonSort order="desc" field="thickness" icon="down" />
               </div>
             </div>
           </th>
           <th>
             <div className="d-flex align-items-center">
-              <div>LONGITUD</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="length" icon="up" />
+              <div>LONGITUD</div>
                 <ButtonSort order="desc" field="length" icon="down" />
               </div>
             </div>
           </th>
           <th>
             <div className="d-flex align-items-center">
-              <div>PESO</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="weight" icon="up" />
+              <div>PESO</div>
                 <ButtonSort order="desc" field="weight" icon="down" />
               </div>
             </div>
           </th>
           <th>
             <div className="d-flex align-items-center">
-              <div>MATERIAL</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="material" icon="up" />
+              <div>MATERIAL</div>
                 <ButtonSort order="desc" field="material" icon="down" />
               </div>
             </div>
           </th>
           <th>
             <div className="d-flex align-items-center">
-              <div>COLOR</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="color" icon="up" />
+              <div>COLOR</div>
                 <ButtonSort order="desc" field="color" icon="down" />
               </div>
             </div>
           </th>
           <th>
             <div className="d-flex align-items-center">
-              <div>CANTIDAD</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="amount" icon="up" />
+              <div>CANTIDAD</div>
                 <ButtonSort order="desc" field="amount" icon="down" />
               </div>
             </div>
           </th>
           <th>
             <div className="d-flex align-items-center">
-              <div>RESTANTE</div>
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="left" icon="up" />
+              <div>RESTANTE</div>
                 <ButtonSort order="desc" field="left" icon="down" />
               </div>
             </div>
