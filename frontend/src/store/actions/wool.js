@@ -19,6 +19,10 @@ import {
   WOOL_CREATE_SUCCESS,
   WOOL_CREATE_FAIL,
   WOOL_CREATE_RESET,
+  WOOL_FILTER_REQUEST,
+  WOOL_FILTER_SUCCESS,
+  WOOL_FILTER_FAIL,
+  WOOL_FILTER_RESET,
 } from "../costants/costants";
 
  // ############## FETCH ALL WOOLS ##############
@@ -55,6 +59,41 @@ export const fetchWools = (field, order) => async (dispatch) => {
   }
 };
 // ############## END FETCH ALL WOOLS ##############
+
+//  // ############## FETCH ALL WOOLS ##############
+// export const filterWoolsStart = () => {
+//   return {
+//     type: WOOL_LIST_REQUEST,
+//   };
+// };
+
+// export const filterWoolsSuccess = (data) => {
+//   return {
+//     type: WOOL_LIST_SUCCESS,
+//     payload: data,
+//   };
+// };
+// export const filterWoolsError = (error) => {
+//   return {
+//     type: WOOL_LIST_FAIL,
+//     payload:
+//       error.response && error.response.data.message
+//         ? error.response.data.message
+//         : error.message,
+//   };
+// };
+
+// export const filterWools = (fields) => async (dispatch) => {
+//   try {
+//     dispatch(filterWoolsStart());
+
+//     const { data } = await axios.get(`/wools?field=${field}&order=${order}`);
+//     dispatch(filterWoolsSuccess(data));
+//   } catch (error) {
+//     dispatch(filterWoolsError(error));
+//   }
+// };
+// // ############## END FILTER WOOLS ##############
 
 
 

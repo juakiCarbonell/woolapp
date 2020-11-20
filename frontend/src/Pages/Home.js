@@ -9,9 +9,12 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import WoolTable from "../components/WoolTable";
 import WoolCard from "../components/WoolCard";
+import Filter from "../components/Filter";
 
 function Home() {
   const { field = "", order = "" } = useParams();
+  const { item } = useParams();
+  console.log('item', item)
 
   const [modeTable, setModeTable] = useState(true);
 
@@ -54,6 +57,9 @@ function Home() {
                 <Button variant="outline-primary">Crear Lana</Button>
               </Link>
             </div>
+          </Row>
+          <Row>
+            <Filter />
           </Row>
           {modeTable ? <WoolTable wools={wools} /> : <WoolCard wools={wools} />}
         </>
