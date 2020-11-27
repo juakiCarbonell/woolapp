@@ -1,22 +1,23 @@
 import React from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { Formik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { setFilterWools } from "../store/actions/filter";
 
 const Filter = () => {
-
   const dispatch = useDispatch();
+
+  const { thickness, left } = useSelector((state) => state.woolFilter);
 
   return (
     <Formik
-      initialValues={{ thickness: "", left: "" }}
+      initialValues={{ thickness, left }}
       onSubmit={(values, { setSubmitting }) => {
         Object.keys(values).forEach(
           (key) => values[key] === "" && delete values[key]
-          );
-        console.log('values', values)
+        );
+        console.log("values", values);
         dispatch(setFilterWools(values));
         // history.push(`/filter/`);
         // console.log('values', values)
@@ -84,7 +85,7 @@ const Filter = () => {
                   </Form.Control>
                 </Form.Group>
               </Col>
-              
+
               <Col>
                 <Button type="submit" variant="primary">
                   Filtrar
