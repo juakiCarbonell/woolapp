@@ -41,7 +41,7 @@ const WoolTable = ({ wools }) => {
             <div className="d-flex align-items-center">
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="length" icon="up" />
-              <div>LONGITUD</div>
+                <div>LONGITUD</div>
                 <ButtonSort order="desc" field="length" icon="down" />
               </div>
             </div>
@@ -50,7 +50,7 @@ const WoolTable = ({ wools }) => {
             <div className="d-flex align-items-center">
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="weight" icon="up" />
-              <div>PESO</div>
+                <div>PESO</div>
                 <ButtonSort order="desc" field="weight" icon="down" />
               </div>
             </div>
@@ -59,7 +59,7 @@ const WoolTable = ({ wools }) => {
             <div className="d-flex align-items-center">
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="material" icon="up" />
-              <div>MATERIAL</div>
+                <div>MATERIAL</div>
                 <ButtonSort order="desc" field="material" icon="down" />
               </div>
             </div>
@@ -68,7 +68,7 @@ const WoolTable = ({ wools }) => {
             <div className="d-flex align-items-center">
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="color" icon="up" />
-              <div>COLOR</div>
+                <div>COLOR</div>
                 <ButtonSort order="desc" field="color" icon="down" />
               </div>
             </div>
@@ -77,7 +77,7 @@ const WoolTable = ({ wools }) => {
             <div className="d-flex align-items-center">
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="amount" icon="up" />
-              <div>CANTIDAD</div>
+                <div>CANTIDAD</div>
                 <ButtonSort order="desc" field="amount" icon="down" />
               </div>
             </div>
@@ -86,7 +86,7 @@ const WoolTable = ({ wools }) => {
             <div className="d-flex align-items-center">
               <div className="d-flex flex-column">
                 <ButtonSort order="asc" field="left" icon="up" />
-              <div>RESTANTE</div>
+                <div>RESTANTE</div>
                 <ButtonSort order="desc" field="left" icon="down" />
               </div>
             </div>
@@ -102,7 +102,7 @@ const WoolTable = ({ wools }) => {
             </td>
             <td className="align-middle">{wool.brand}</td>
             <td className="align-middle">{wool.name}</td>
-            <td className="align-middle">{wool.thickness}mm</td>
+            <td className="align-middle text-capitalize">{wool.thickness}</td>
             <td className="align-middle">{wool.length}m</td>
             <td className="align-middle">{wool.weight}gr</td>
             <td className="align-middle">{wool.material}</td>

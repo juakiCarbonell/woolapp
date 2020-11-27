@@ -16,7 +16,7 @@ function App() {
       <main className="py-3">
         <Container>
           <Switch>
-            <Route exact path="/filter/:item">
+            <Route exact path="/filter/:thickness?/:left?">
               <Home />
             </Route>
             <Route exact path="/sortby/:field/:order">

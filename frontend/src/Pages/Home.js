@@ -13,8 +13,7 @@ import Filter from "../components/Filter";
 
 function Home() {
   const { field = "", order = "" } = useParams();
-  const { item } = useParams();
-  console.log('item', item)
+
 
   const [modeTable, setModeTable] = useState(true);
 
@@ -22,10 +21,12 @@ function Home() {
 
   const woolList = useSelector((state) => state.woolList);
   const { loading, error, wools } = woolList;
+  const woolFilter = useSelector((state) => state.woolFilter);
+
 
   useEffect(() => {
-    dispatch(fetchWools(field, order));
-  }, [dispatch, field, order]);
+    dispatch(fetchWools(field, order,{ ...woolFilter}));
+  }, [dispatch, field, order, woolFilter]);
 
   return (
     <>

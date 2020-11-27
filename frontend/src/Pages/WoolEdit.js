@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import axios from "axios";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
@@ -41,18 +40,14 @@ const WoolForm = () => {
   const { loading, error, wool } = woolDetails;
 
   useEffect(() => {
-    console.log('effect')
     if (woolSuccess) {
-      console.log("1");
       dispatch(updateWoolReset());
       dispatch(fetchWoolReset());
       history.push(`/wool/${id}`);
     } else {
       if (!wool.name || wool._id !== id) {
-        console.log("2");
         dispatch(fetchWool(id));
       } else {
-        console.log("3");
         setImage(wool.image);
         setBrand(wool.brand);
         setName(wool.name);
@@ -93,10 +88,6 @@ const WoolForm = () => {
         color: "",
         amount: "",
       }; ;
-
-  console.log("loading", loading);
-  console.log("error", error);
-  console.log("wool", wool);
 
   return (
     <>

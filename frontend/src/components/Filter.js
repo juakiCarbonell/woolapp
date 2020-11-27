@@ -1,23 +1,25 @@
 import React from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
-import { ErrorMessage, Formik } from "formik";
-import {useHistory } from "react-router-dom";
+import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+
+import { setFilterWools } from "../store/actions/filter";
 
 const Filter = () => {
-  let history = useHistory();
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
+
+  const dispatch = useDispatch();
 
   return (
     <Formik
       initialValues={{ thickness: "", left: "" }}
       onSubmit={(values, { setSubmitting }) => {
         Object.keys(values).forEach(
-          (key) => values[key] == "" && delete values[key]
+          (key) => values[key] === "" && delete values[key]
           );
-        history.push(`/filter/thickness`);
         console.log('values', values)
+        dispatch(setFilterWools(values));
+        // history.push(`/filter/`);
+        // console.log('values', values)
         // if emtpy push to /
       }}
     >
@@ -74,11 +76,11 @@ const Filter = () => {
                     <option value="">Elige Peso</option>
                     <option value="1">Menor de 50gr</option>
                     <option value="2">Entre 50gr y 100gr </option>
-                    <option value="2">Entre 100gr y 150gr </option>
-                    <option value="2">Entre 150gr y 200gr </option>
-                    <option value="2">Entre 200gr y 300gr </option>
-                    <option value="2">Entre 300gr y 500gr </option>
-                    <option value="2">Mayor de 500gr </option>
+                    <option value="3">Entre 100gr y 150gr </option>
+                    <option value="4">Entre 150gr y 200gr </option>
+                    <option value="5">Entre 200gr y 300gr </option>
+                    <option value="6">Entre 300gr y 500gr </option>
+                    <option value="7">Mayor de 500gr </option>
                   </Form.Control>
                 </Form.Group>
               </Col>

@@ -1,21 +1,14 @@
 import asyncHandler from "express-async-handler";
 import Wool from "../models/wool.js";
+import queryGenertor from "../utils/woolFilter.js";
 
 // @des     Fetch all wools
 // @route   GET /
 // @access  Public
 const getWools = asyncHandler(async (req, res) => {
-  const field = req.query.field;
-  const order = req.query.order;
-  let wools;
-  const sort = {};
-  sort[field] = order;
-  if (field.length === 0 && order.length === 0) {
-    wools = await Wool.find({});
-  } else {
-    wools = await Wool.find({}).sort(sort);
-  }
+  const query = queryGenertor(req)
 
+  const wools = await Wool.find(query);
   res.send(wools);
 });
 
