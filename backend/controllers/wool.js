@@ -6,9 +6,17 @@ import queryGenertor from "../utils/woolFilter.js";
 // @route   GET /
 // @access  Public
 const getWools = asyncHandler(async (req, res) => {
-  const query = queryGenertor(req)
-
-  const wools = await Wool.find(query);
+  const query = queryGenertor(req);
+  const field = req.query.field;
+  const order = req.query.order;
+  const sort = {};
+  sort[field] = order;
+  let wools;
+  if (field.length === 0 && order.length === 0) {
+    wools = await Wool.find(query);
+  } else {
+    wools = await Wool.find(query).sort(sort);
+  }
   res.send(wools);
 });
 
@@ -54,7 +62,7 @@ const createWool = asyncHandler(async (req, res) => {
     color,
     amount,
   } = req.body;
-  const left = amount * weight
+  const left = amount * weight;
   const wool = new Wool({
     name,
     brand,
@@ -65,7 +73,7 @@ const createWool = asyncHandler(async (req, res) => {
     material,
     color,
     amount,
-    left
+    left,
   });
   const createdWool = await wool.save();
   res.status(201).json(createdWool);
