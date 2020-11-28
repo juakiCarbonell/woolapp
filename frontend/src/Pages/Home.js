@@ -10,10 +10,10 @@ import Loader from "../components/Loader";
 import WoolTable from "../components/WoolTable";
 import WoolCard from "../components/WoolCard";
 import Filter from "../components/Filter";
+import SearchBox from "../components/SearchBox";
 
 function Home() {
-  const { field = "", order = "" } = useParams();
-
+  const { field = "", order = "", keyword } = useParams();
 
   const [modeTable, setModeTable] = useState(true);
 
@@ -23,9 +23,8 @@ function Home() {
   const { loading, error, wools } = woolList;
   const woolFilter = useSelector((state) => state.woolFilter);
 
-
   useEffect(() => {
-    dispatch(fetchWools(field, order,{ ...woolFilter}));
+    dispatch(fetchWools(field, order, { ...woolFilter }, keyword));
   }, [dispatch, field, order, woolFilter]);
 
   return (
@@ -61,6 +60,7 @@ function Home() {
           </div>
           <div className="my-4">
             <Filter />
+            <SearchBox />
           </div>
           {modeTable ? <WoolTable wools={wools} /> : <WoolCard wools={wools} />}
         </>

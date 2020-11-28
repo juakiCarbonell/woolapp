@@ -22,6 +22,9 @@ function App() {
             <Route exact path="/sortby/:field/:order">
               <Home />
             </Route>
+            <Route exact path="/search/:keyword">
+              <Home />
+            </Route>
             <Route exact path="/">
               <Home />
             </Route>
