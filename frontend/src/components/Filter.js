@@ -3,12 +3,16 @@ import { Form, Button, Col, Row } from "react-bootstrap";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setFilterWools } from "../store/actions/filter";
+import { setFilterWools, resetFilterWools } from "../store/actions/filter";
 
 const Filter = () => {
   const dispatch = useDispatch();
 
   const { thickness, left } = useSelector((state) => state.woolFilter);
+
+  const resetFilterHanlder = () => {
+    dispatch(resetFilterWools())
+  }
 
   return (
     <Formik
@@ -34,7 +38,7 @@ const Filter = () => {
       }) => {
         return (
           <Form onSubmit={handleSubmit}>
-            <Row>
+            <Row className="align-items-center border">
               <Col>
                 <Form.Group>
                   <Form.Label>Grossor</Form.Label>
@@ -89,6 +93,11 @@ const Filter = () => {
               <Col>
                 <Button type="submit" variant="primary">
                   Filtrar
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" onClick={resetFilterHanlder}>
+                  Reset
                 </Button>
               </Col>
             </Row>

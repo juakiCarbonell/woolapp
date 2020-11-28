@@ -36,7 +36,7 @@ function Home() {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Row className="my-4">
+          <div className="my-4 d-flex">
             <h1>Lanas</h1>
             <div className="ml-auto d-flex align-items-center">
               <div className="d-flex align-items-center mx-4">
@@ -58,10 +58,10 @@ function Home() {
                 <Button variant="outline-primary">Crear Lana</Button>
               </Link>
             </div>
-          </Row>
-          <Row>
+          </div>
+          <div className="my-4">
             <Filter />
-          </Row>
+          </div>
           {modeTable ? <WoolTable wools={wools} /> : <WoolCard wools={wools} />}
         </>
       )}
