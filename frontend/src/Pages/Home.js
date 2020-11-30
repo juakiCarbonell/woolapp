@@ -13,7 +13,7 @@ import Filter from "../components/Filter";
 import SearchBox from "../components/SearchBox";
 
 function Home() {
-  const { field = "", order = "", keyword } = useParams();
+  const { field , order , keyword } = useParams();
 
   const [modeTable, setModeTable] = useState(true);
 

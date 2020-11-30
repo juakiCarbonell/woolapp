@@ -2,15 +2,18 @@ import React from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { setFilterWools, resetFilterWools } from "../store/actions/filter";
 
 const Filter = () => {
+  let history = useHistory()
   const dispatch = useDispatch();
 
   const { thickness, left } = useSelector((state) => state.woolFilter);
 
   const resetFilterHanlder = () => {
+    history.push(`/`);
     dispatch(resetFilterWools())
   }
 
@@ -23,7 +26,7 @@ const Filter = () => {
         );
         console.log("values", values);
         dispatch(setFilterWools(values));
-        // history.push(`/filter/`);
+        history.push(`/`);
         // console.log('values', values)
         // if emtpy push to /
       }}

@@ -12,7 +12,7 @@ const getWools = asyncHandler(async (req, res) => {
   const sort = {};
   sort[field] = order;
   let wools;
-  if (field.length === 0 && order.length === 0) {
+  if (!field && !order) {
     wools = await Wool.find(query);
   } else {
     wools = await Wool.find(query).sort(sort);
