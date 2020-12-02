@@ -10,7 +10,7 @@ const Filter = () => {
   let history = useHistory()
   const dispatch = useDispatch();
 
-  const { thickness, left } = useSelector((state) => state.woolFilter);
+  const { thickness, left, keyword } = useSelector((state) => state.woolFilter);
 
   const resetFilterHanlder = () => {
     history.push(`/`);
@@ -19,7 +19,7 @@ const Filter = () => {
 
   return (
     <Formik
-      initialValues={{ thickness, left }}
+      initialValues={{ thickness, left, keyword }}
       onSubmit={(values, { setSubmitting }) => {
         Object.keys(values).forEach(
           (key) => values[key] === "" && delete values[key]
@@ -89,6 +89,20 @@ const Filter = () => {
                     <option value="6">Entre 300gr y 500gr </option>
                     <option value="7">Mayor de 500gr </option>
                   </Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>Buscar</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Buscar"
+                    name="keyword"
+                    id="keyword"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.keyword}
+                  ></Form.Control>
                 </Form.Group>
               </Col>
 

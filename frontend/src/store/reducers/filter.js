@@ -5,7 +5,8 @@ import {
 
 const initialFilter = {
   thickness: null, 
-  left: null
+  left: null,
+  keyword: null
 };
 
 export const woolFilter = (state = initialFilter, action) => {

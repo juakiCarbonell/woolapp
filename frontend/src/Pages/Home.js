@@ -10,7 +10,7 @@ import Loader from "../components/Loader";
 import WoolTable from "../components/WoolTable";
 import WoolCard from "../components/WoolCard";
 import Filter from "../components/Filter";
-import SearchBox from "../components/SearchBox";
+// import SearchBox from "../components/SearchBox";
 
 function Home() {
   const { field , order , keyword } = useParams();
@@ -61,7 +61,7 @@ function Home() {
           </div>
           <div className="my-4">
             <Filter />
-            <SearchBox search={keyword} />
+            {/* <SearchBox search={keyword} /> */}
           </div>
           {modeTable ? <WoolTable wools={wools} /> : <WoolCard wools={wools} />}
         </>
