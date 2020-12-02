@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Switch from "react-switch";
 import { Link, useParams } from "react-router-dom";
 

@@ -51,7 +51,7 @@ export const fetchWools = (field, order, filter, keyword) => async (dispatch) =>
   // console.log('keyword', keyword)
   let items = Object.keys(filter);
   let filterFields = ""
-  items.map((key) => {
+  items.forEach((key) => {
     let value = filter[key];
     if(value !== null){
       filterFields+= `&${key}=${value}`
@@ -64,7 +64,6 @@ export const fetchWools = (field, order, filter, keyword) => async (dispatch) =>
   if (keyword) {
     query += `&keyword=${keyword}`;
   }
-  console.log('quey', query)
   try {
     dispatch(fetchWoolsStart());
     const { data } = await axios.get(`/wools?${query}${filterFields}`);
