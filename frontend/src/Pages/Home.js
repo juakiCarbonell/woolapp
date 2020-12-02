@@ -13,7 +13,7 @@ import Filter from "../components/Filter";
 // import SearchBox from "../components/SearchBox";
 
 function Home() {
-  const { field , order , keyword } = useParams();
+  const { field , order } = useParams();
 
 
   const [modeTable, setModeTable] = useState(true);
@@ -25,8 +25,8 @@ function Home() {
   const woolFilter = useSelector((state) => state.woolFilter);
 
   useEffect(() => {
-    dispatch(fetchWools(field, order, { ...woolFilter }, keyword));
-  }, [dispatch, field, order, woolFilter, keyword]);
+    dispatch(fetchWools(field, order, { ...woolFilter }));
+  }, [dispatch, field, order, woolFilter ]);
 
   return (
     <>

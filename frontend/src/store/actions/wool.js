@@ -53,9 +53,12 @@ export const fetchWools = (field, order, filter, keyword) => async (dispatch) =>
   let filterFields = ""
   items.forEach((key) => {
     let value = filter[key];
-    if(value !== null){
+    if(value.length !== 0){
       filterFields+= `&${key}=${value}`
     }
+    // if(value !== null){
+    //   filterFields+= `&${key}=${value}`
+    // }
   });
   let query = ""
   if (field && order) {

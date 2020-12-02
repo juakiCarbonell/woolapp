@@ -4,9 +4,9 @@ import {
 } from "../costants/costants";
 
 const initialFilter = {
-  thickness: null, 
-  left: null,
-  keyword: null
+  thickness: '', 
+  left: '',
+  keyword: ''
 };
 
 export const woolFilter = (state = initialFilter, action) => {

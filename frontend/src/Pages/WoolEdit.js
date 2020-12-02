@@ -17,15 +17,6 @@ import {
 const WoolForm = () => {
   let { id } = useParams();
   let history = useHistory();
-  // const [image, setImage] = useState("");
-  // const [brand, setBrand] = useState("");
-  // const [name, setName] = useState("");
-  // const [thickness, setThickness] = useState("");
-  // const [length, setLength] = useState(0);
-  // const [weight, setWeight] = useState(0);
-  // const [material, setMaterial] = useState("");
-  // const [color, setColor] = useState("");
-  // const [amount, setAmount] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -41,27 +32,11 @@ const WoolForm = () => {
 
   useEffect(() => {
     if (woolSuccess) {
-      console.log('if')
       dispatch(updateWoolReset());
       dispatch(fetchWoolReset());
       history.push(`/wool/${id}`);
-    } else {
-      
-      if (!wool.name || wool._id !== id) {
-        console.log("if else");
-        dispatch(fetchWool(id));
-      } else {
-        // console.log("else else");
-        // setImage(wool.image);
-        // setBrand(wool.brand);
-        // setName(wool.name);
-        // setThickness(wool.thickness);
-        // setLength(wool.length);
-        // setWeight(wool.weight);
-        // setMaterial(wool.material);
-        // setColor(wool.color);
-        // setAmount(wool.amount);
-      }
+    } else if (!wool.name || wool._id !== id) {
+      dispatch(fetchWool(id));
     }
   }, [dispatch, id, wool, woolSuccess, history]);
 
@@ -91,7 +66,7 @@ const WoolForm = () => {
         material: "",
         color: "",
         amount: "",
-      }; ;
+      };
 
   return (
     <>

@@ -12,22 +12,22 @@ const Filter = () => {
 
   const { thickness, left, keyword } = useSelector((state) => state.woolFilter);
 
+
   const resetFilterHanlder = () => {
-    history.push(`/`);
     dispatch(resetFilterWools())
+    history.push(`/`);
   }
 
   return (
     <Formik
       initialValues={{ thickness, left, keyword }}
       onSubmit={(values, { setSubmitting }) => {
-        Object.keys(values).forEach(
-          (key) => values[key] === "" && delete values[key]
-        );
+        // Object.keys(values).forEach(
+        //   (key) => values[key] === "" && delete values[key]
+        // );
         dispatch(setFilterWools(values));
         history.push(`/`);
-        // console.log('values', values)
-        // if emtpy push to /
+  
       }}
     >
       {({
