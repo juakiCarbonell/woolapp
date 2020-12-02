@@ -45,21 +45,26 @@ export const fetchWoolsError = (error) => {
 };
 
 export const fetchWools = (field, order, filter, keyword) => async (dispatch) => {
-  console.log('filter', filter)
-  console.log('field', field)
-  console.log('order', order)
+  // console.log('filter', filter)
+  // console.log('field', field)
+  // console.log('order', order)
+  // console.log('keyword', keyword)
   let items = Object.keys(filter);
   let filterFields = ""
   items.map((key) => {
     let value = filter[key];
-    if(value !== undefined){
+    if(value !== null){
       filterFields+= `&${key}=${value}`
     }
   });
   let query = ""
   if (field && order) {
-    query += `field=${field}&order=${order}`;
+    query += `&field=${field}&order=${order}`;
   }
+  if (keyword) {
+    query += `&keyword=${keyword}`;
+  }
+  console.log('quey', query)
   try {
     dispatch(fetchWoolsStart());
     const { data } = await axios.get(`/wools?${query}${filterFields}`);

@@ -24,7 +24,6 @@ const Filter = () => {
         Object.keys(values).forEach(
           (key) => values[key] === "" && delete values[key]
         );
-        console.log("values", values);
         dispatch(setFilterWools(values));
         history.push(`/`);
         // console.log('values', values)

@@ -15,6 +15,7 @@ import SearchBox from "../components/SearchBox";
 function Home() {
   const { field , order , keyword } = useParams();
 
+
   const [modeTable, setModeTable] = useState(true);
 
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(fetchWools(field, order, { ...woolFilter }, keyword));
-  }, [dispatch, field, order, woolFilter]);
+  }, [dispatch, field, order, woolFilter, keyword]);
 
   return (
     <>
@@ -60,7 +61,7 @@ function Home() {
           </div>
           <div className="my-4">
             <Filter />
-            <SearchBox />
+            <SearchBox search={keyword} />
           </div>
           {modeTable ? <WoolTable wools={wools} /> : <WoolCard wools={wools} />}
         </>

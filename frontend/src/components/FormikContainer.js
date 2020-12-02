@@ -5,7 +5,6 @@ import { Form, Button, Image } from "react-bootstrap";
 import Loader from "./Loader";
 
 const FormikContainer = ({ submitHandler, initialValues, submitText }) => {
-  // console.log('initial', initialValues)
   const [uploading, setUploading] = useState(false);
   return (
     <Formik

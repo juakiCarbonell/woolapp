@@ -1,9 +1,17 @@
 const queryGenertor = (req) => {
   const thicknessParam = req.query.thickness;
   const leftParam = req.query.left;
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
 
   if (thicknessParam && !leftParam) {
-    return { thickness: thicknessParam };
+    return { thickness: thicknessParam, ...keyword };
   } else if (!thicknessParam && leftParam) {
     switch (leftParam) {
       case "1":
@@ -58,10 +66,10 @@ const queryGenertor = (req) => {
           thickness: thicknessParam,
         };
       default:
-        return {};
+        return { ...keyword };
     }
   } else {
-    return {};
+    return { ...keyword };
   }
 };
 

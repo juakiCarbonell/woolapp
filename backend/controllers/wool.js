@@ -7,6 +7,7 @@ import queryGenertor from "../utils/woolFilter.js";
 // @access  Public
 const getWools = asyncHandler(async (req, res) => {
   const query = queryGenertor(req);
+  console.log('query', query)
   const field = req.query.field;
   const order = req.query.order;
   const sort = {};
