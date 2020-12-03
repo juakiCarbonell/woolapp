@@ -6,18 +6,26 @@ import queryGenertor from "../utils/woolFilter.js";
 // @route   GET /
 // @access  Public
 const getWools = asyncHandler(async (req, res) => {
+  const pageSize = 5;
+  const page = Number(req.query.pageNumber) || 1;
   const query = queryGenertor(req);
   const field = req.query.field;
   const order = req.query.order;
   const sort = {};
   sort[field] = order;
   let wools;
+  const count = await Wool.countDocuments(query);
   if (!field && !order) {
-    wools = await Wool.find(query);
+    wools = await Wool.find(query)
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
   } else {
-    wools = await Wool.find(query).sort(sort);
+    wools = await Wool.find(query)
+      .sort(sort)
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
   }
-  res.send(wools);
+  res.json({wools, page, pages: Math.ceil(count / pageSize)});
 });
 
 // @des     Fetch single wool

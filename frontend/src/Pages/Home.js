@@ -10,23 +10,24 @@ import Loader from "../components/Loader";
 import WoolTable from "../components/WoolTable";
 import WoolCard from "../components/WoolCard";
 import Filter from "../components/Filter";
+import Paginate from "../components/Paginate";
 // import SearchBox from "../components/SearchBox";
 
 function Home() {
-  const { field , order } = useParams();
-
+  const { field, order, pageNumber } = useParams();
 
   const [modeTable, setModeTable] = useState(true);
 
   const dispatch = useDispatch();
 
   const woolList = useSelector((state) => state.woolList);
-  const { loading, error, wools } = woolList;
+  const { loading, error, wools, page, pages } = woolList;
+  console.log("woolList", woolList);
   const woolFilter = useSelector((state) => state.woolFilter);
 
   useEffect(() => {
-    dispatch(fetchWools(field, order, { ...woolFilter }));
-  }, [dispatch, field, order, woolFilter ]);
+    dispatch(fetchWools(field, order, pageNumber, { ...woolFilter }));
+  }, [dispatch, field, order, woolFilter, pageNumber]);
 
   return (
     <>
@@ -64,6 +65,13 @@ function Home() {
             {/* <SearchBox search={keyword} /> */}
           </div>
           {modeTable ? <WoolTable wools={wools} /> : <WoolCard wools={wools} />}
+          <div>
+            <Paginate
+              pages={pages}
+              page={page}
+              // keyword={keyword && keyword}
+            />
+          </div>
         </>
       )}
     </>

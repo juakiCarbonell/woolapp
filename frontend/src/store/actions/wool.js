@@ -44,7 +44,7 @@ export const fetchWoolsError = (error) => {
   };
 };
 
-export const fetchWools = (field, order, filter, keyword) => async (dispatch) => {
+export const fetchWools = (field, order, pageNumber='', filter ) => async (dispatch) => {
   // console.log('filter', filter)
   // console.log('field', field)
   // console.log('order', order)
@@ -64,12 +64,15 @@ export const fetchWools = (field, order, filter, keyword) => async (dispatch) =>
   if (field && order) {
     query += `&field=${field}&order=${order}`;
   }
-  if (keyword) {
-    query += `&keyword=${keyword}`;
-  }
+  // if (keyword) {
+  //   query += `&keyword=${keyword}`;
+  // }
+  const pageNumberQuery = `&pageNumber=${pageNumber}`
   try {
     dispatch(fetchWoolsStart());
-    const { data } = await axios.get(`/wools?${query}${filterFields}`);
+    const { data } = await axios.get(
+      `/wools?${query}${filterFields}${pageNumberQuery}`
+    );
     dispatch(fetchWoolsSuccess(data));
   } catch (error) {
     dispatch(fetchWoolsError(error));

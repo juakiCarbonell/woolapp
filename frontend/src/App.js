@@ -25,6 +25,12 @@ function App() {
             <Route exact path="/search/:keyword">
               <Home />
             </Route>
+            <Route exact path="/page/:pageNumber">
+              <Home />
+            </Route>
+            <Route exact path="/search/:keyword/page/:pageNumber">
+              <Home />
+            </Route>
             <Route exact path="/">
               <Home />
             </Route>

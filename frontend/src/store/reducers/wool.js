@@ -42,7 +42,13 @@ export const woolList = (state = initialStateList, action) => {
     case WOOL_LIST_REQUEST:
       return { ...state, loading: true };
     case WOOL_LIST_SUCCESS:
-      return { ...state, loading: false, wools: action.payload };
+      return {
+        ...state,
+        loading: false,
+        wools: action.payload.wools,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      };
     case WOOL_LIST_FAIL:
       return { ...state, loading: false, error: action.payload };
     default:
