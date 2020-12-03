@@ -55,16 +55,12 @@ function Wool() {
                 </Link>
               </Col>
             </Row>
-            <Row className="align-items-center">
-              <Col>
-                <h2 className="text-center">{wool.name}</h2>
-              </Col>
-            </Row>
             <Row className="row align-items-center">
               <Col md={6}>
+                <h2>{wool.name}</h2>
                 <Image src={wool.image} alt={wool.name} fluid />
               </Col>
-              <Col md={3}>
+              <Col md={6}>
                 <ListGroup>
                   <ListGroup.Item
                     style={{ color: "black", backgroundColor: "white" }}
@@ -110,18 +106,23 @@ function Wool() {
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
+            </Row>
+            <Row className="row align-items-center">
               <Col md={3}>
                 <Link to={`/wool/edit/${wool._id}`}>
-                  <Button variant="light" className="btn-sm">
+                  <Button variant="outline-primary">
                     <i className="fas fa-edit"></i>
+                    Editar
                   </Button>
                 </Link>
+              </Col>
+              <Col md={3}>
                 <Button
                   variant="danger"
-                  className="btn-sm"
                   onClick={() => deleteHandler(wool._id)}
                 >
                   <i className="fas fa-trash"></i>
+                  Eliminar
                 </Button>
               </Col>
             </Row>

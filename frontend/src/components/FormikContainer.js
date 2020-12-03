@@ -219,7 +219,7 @@ const FormikContainer = ({ submitHandler, initialValues, submitText }) => {
                 type="number"
                 name="weight"
                 id="weight"
-                placeholder="Cantidad"
+                placeholder="Peso"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.weight}

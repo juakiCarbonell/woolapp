@@ -38,7 +38,7 @@ const Filter = () => {
       }) => {
         return (
           <Form onSubmit={handleSubmit}>
-            <div className="d-flex align-items-center justify-content-between border py-4">
+            <div className="d-flex align-items-center justify-content-between border py-4 flex-wrap">
               <div className="d-flex align-items-center ">
                 <Col>
                   <Form.Group>

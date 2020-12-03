@@ -112,7 +112,7 @@ const WoolTable = ({ wools }) => {
 
             <td className="align-middle">
               <Link to={`/wool/${wool._id}`}>
-                <Button variant="light" className="btn-sm">
+                <Button variant="light">
                   <i className="fas fa-eye"></i>
                 </Button>
               </Link>
